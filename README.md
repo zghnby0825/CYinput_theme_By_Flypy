@@ -7,3 +7,6 @@ VGHFly：
 2、添加“ ；”引导按键，和“ ` ”反查按键「上滑按键进行反查」
 
 3、增加空格键的宽度，提高输入舒适度
+
+
+方案来源：https://github.com/jqtmviyu/flypy
