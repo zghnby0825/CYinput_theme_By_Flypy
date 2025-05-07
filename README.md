@@ -14,7 +14,7 @@ https://appgallery.huawei.com/app/detail?id=app.flytype.hmos.bim&channelId=SHARE
 
 # 主题样式
 
-主题样式.png
+![主题样式.png](https://github.com/zghnby0825/HarmonyNEXT_Rime_input/blob/main/%E4%B8%BB%E9%A2%98%E6%A0%B7%E5%BC%8F.png)
 
 # 方案来源：
 〉https://github.com/jqtmviyu/flypy
