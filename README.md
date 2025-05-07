@@ -10,5 +10,6 @@
 
 
 # 方案来源：
-https://github.com/jqtmviyu/flypy
-https://github.com/cubercsl/rime-flypy
+〉https://github.com/jqtmviyu/flypy
+
+〉https://github.com/cubercsl/rime-flypy
