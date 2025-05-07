@@ -1,3 +1,7 @@
+# 超越输入法：
+
+https://appgallery.huawei.com/app/detail?id=app.flytype.hmos.bim&channelId=SHARE
+
 # VGHFly：
 
 基于原主题修改内容：
