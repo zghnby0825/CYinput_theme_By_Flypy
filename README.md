@@ -1,4 +1,4 @@
-VGHFly：
+# VGHFly：
 
 基于原主题修改内容：
 
@@ -9,4 +9,5 @@ VGHFly：
 3、增加空格键的宽度，提高输入舒适度
 
 
-方案来源：https://github.com/jqtmviyu/flypy
+# 方案来源：
+ https://github.com/jqtmviyu/flypy
