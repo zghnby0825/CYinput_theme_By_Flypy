@@ -12,6 +12,9 @@ https://appgallery.huawei.com/app/detail?id=app.flytype.hmos.bim&channelId=SHARE
 
 3、增加空格键的宽度，提高输入舒适度
 
+# 主题样式
+
+主题样式.png
 
 # 方案来源：
 〉https://github.com/jqtmviyu/flypy
