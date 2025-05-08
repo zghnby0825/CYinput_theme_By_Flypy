@@ -291,6 +291,11 @@ preset_color_schemes:
         hilited_key_back_color: *bg-200
         key_text_color: *primary-300
         hilited_key_text_color: *text-100 
+      send_grave:
+        key_back_color: *primary-100
+        hilited_key_back_color: *bg-200
+        key_text_color: *primary-300
+        hilited_key_text_color: *text-100   
       halfat:
         key_back_color: *primary-100
         hilited_key_back_color: *bg-200
@@ -468,11 +473,11 @@ preset_color_schemes:
         hilited_key_back_color: *bg-200
         key_text_color: *primary-300
         hilited_key_text_color: *text-100
-      send_ffhc:
+      send_juhc:     
         key_back_color: *primary-100
         hilited_key_back_color: *bg-200
         key_text_color: *primary-300
-        hilited_key_text_color: *text-100   
+        hilited_key_text_color: *text-100
       halfat:
         key_back_color: *primary-100
         hilited_key_back_color: *bg-200
@@ -558,9 +563,9 @@ preset_keyboards:
       - {click: eisu_toggle_符_symbols, width: 15, name: symbol, preview: false, long_click: eisu_toggle_ABC_english, swipe_up: eisu_toggle_123_number} #符号/英文/数字
       # - {click: eisu_toggle_123_number, has_menu: text_halfperiod, width: 13, name: number, preview: false} #数字
       # - {width: 0.5}
-      - {click: send_ffhc,  swipe_up: "grave", name: send_ffhc, width: 10, preview: false} #引导
-      - {click: space, width: 50, name: space, swipe_up: commit_0, preview: false} #空格
-              
+      - {click: send_grave,  long_click: "。",name: send_grave, swipe_up: send_3, width: 10, preview: false} #grave
+      - {click: space, width: 40, name: space, preview: false} #空格
+      - {click: send_ffhc,  long_click: commit_fullcomma, name: send_ffhc, width: 10, preview: false} #引导        
       #      - {click: eisu_toggle_ABC_english_schema_easy_en, has_menu: text_halfcomma, width: 11, name: english, preview: false}
       # - {click: mode_switch_cn_or_en, has_menu: text_halfcomma, width: 11, name: mode_switch_cn_or_en, preview: false}
       - {click: return, width: 25, name: retur, composing: confirm, long_click: next, rect_preview: true, preview: false}
@@ -609,9 +614,9 @@ preset_keyboards:
       #4
       - {click: eisu_toggle_符_symbols, width: 15, name: symbol, long_click: eisu_toggle_返回_default_schema_default, swipe_up: eisu_toggle_123_number} #加了后面这串和主键盘一样
       # - {click: eisu_toggle_123_number, width: 10, name: number}
-      - {click: send_dot, width: 10 }
-      - {click: space, width: 50, name: space}
-            
+      - {click: commit_halfat, width: 10 }
+      - {click: space, width: 40, name: space}
+      - {click: send_dot, width: 10 }      
       #- {click: eisu_toggle_返回_default, width: 11, name: english}
       # - {click: eisu_toggle_返回_default_schema_default, width: 11, name: english, preview: false}
       - {click: return, width: 25, name: return, composing: confirm}
@@ -839,7 +844,10 @@ preset_keys:
   send_dot: {label: ".", send: .}
   
   #分号
-  send_ffhc: {label: ";", send: ;}
+  send_ffhc: {label: "♪", send: ;}
+
+  #反查
+  send_grave: {label: "ϟ", send: grave}
 
   #换行
   next: {label: "换行", commit: "\n"}
