@@ -1,6 +1,6 @@
 # 超越输入法：
 
-https://appgallery.huawei.com/app/detail?id=app.flytype.hmos.bim&channelId=SHARE
+〉https://appgallery.huawei.com/app/detail?id=app.flytype.hmos.bim&channelId=SHARE
 
 # VGHFly：
 
@@ -12,7 +12,7 @@ https://appgallery.huawei.com/app/detail?id=app.flytype.hmos.bim&channelId=SHARE
 
 3、英文键盘做了习惯性的处理，空格左边加了“ @ ”按键，右边为“ . ”
 
-# 主题样式
+# 主题样式：
 
 
 
