@@ -9,6 +9,7 @@ import_tables:
   - 'flypy/flypy.fast.symbols'            # 快符
   - 'flypy/flypy.primary'                 # 首选字词
   - 'flypy/flypy.secondary'               # 次选字词
+  - 'flypy/flypy.en'                      # 中英混词库
   - 'flypy/flypy.three'                   # 三码填空
   - 'flypy/flypy.web'                     # 网站
   - 'flypy/flypy.emoji'                   # 表情
