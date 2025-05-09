@@ -847,7 +847,7 @@ preset_keys:
   send_ffhc: {label: "♪", send: ;}
 
   #反查
-  send_grave: {label: "●", send: grave}
+  send_grave: {label: "○", send: grave}
 
   #换行
   next: {label: "换行", commit: "\n"}
