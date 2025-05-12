@@ -563,9 +563,9 @@ preset_keyboards:
       - {click: eisu_toggle_符_symbols, width: 15, name: symbol, preview: false, long_click: eisu_toggle_ABC_english, swipe_up: eisu_toggle_123_number} #符号/英文/数字
       # - {click: eisu_toggle_123_number, has_menu: text_halfperiod, width: 13, name: number, preview: false} #数字
       # - {width: 0.5}
-      - {click: send_grave,  swipe_up: commit_fullcomma, name: send_grave, width: 10, preview: false} #grave
+      - {click: commit_fullcomma,  swipe_up: "。", name: commit_fullcomma, width: 10, preview: false} #逗号和句号
       - {click: space, width: 40, name: space, preview: false} #空格
-      - {click: send_ffhc,  swipe_up: "。", name: send_ffhc, width: 10, preview: false} #引导        
+      - {click: send_ffhc,  swipe_up: "send_grave", name: send_ffhc, width: 10, preview: false} #引导+反查        
       #      - {click: eisu_toggle_ABC_english_schema_easy_en, has_menu: text_halfcomma, width: 11, name: english, preview: false}
       # - {click: mode_switch_cn_or_en, has_menu: text_halfcomma, width: 11, name: mode_switch_cn_or_en, preview: false}
       - {click: return, width: 25, name: retur, composing: confirm, long_click: next, rect_preview: true, preview: false}
@@ -847,7 +847,7 @@ preset_keys:
   send_ffhc: {label: "♪", send: ;}
 
   #反查
-  send_grave: {label: "○", send: grave}
+  send_grave: {label: "`", send: grave}
 
   #换行
   next: {label: "换行", commit: "\n"}
