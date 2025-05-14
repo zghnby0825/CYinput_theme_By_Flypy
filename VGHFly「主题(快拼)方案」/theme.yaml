@@ -563,7 +563,7 @@ preset_keyboards:
       - {click: eisu_toggle_符_symbols, width: 15, name: symbol, preview: false, long_click: eisu_toggle_ABC_english, swipe_up: eisu_toggle_123_number} #符号/英文/数字
       # - {click: eisu_toggle_123_number, has_menu: text_halfperiod, width: 13, name: number, preview: false} #数字
       # - {width: 0.5}
-      - {click: send_xpgh,  swipe_up: "?", name: send_xpgh, width: 10, preview: false} #斜杠问号
+      - {click: send_xpgh,  swipe_up: "send_2", name: send_xpgh, width: 10, preview: false} #斜杠+次选
       - {click: space, width: 40, name: space, preview: false} #空格
       - {click: send_ffhc,  swipe_up: "send_grave", name: send_ffhc, width: 10, preview: false} #引导+反查        
       #      - {click: eisu_toggle_ABC_english_schema_easy_en, has_menu: text_halfcomma, width: 11, name: english, preview: false}
