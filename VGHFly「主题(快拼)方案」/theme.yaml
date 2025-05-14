@@ -565,7 +565,7 @@ preset_keyboards:
       # - {width: 0.5}
       - {click: send_xpgh,  swipe_up: "send_2", name: send_xpgh, width: 10, preview: false} #斜杠+次选
       - {click: space, width: 40, name: space, preview: false} #空格
-      - {click: send_ffhc,  swipe_up: "send_grave", name: send_ffhc, width: 10, preview: false} #引导+反查        
+      - {click: send_ffhc,  swipe_up: "send_grave",  swipe_down: commit_halfperiod, name: send_ffhc, width: 10, preview: false} #引导+反查        
       #      - {click: eisu_toggle_ABC_english_schema_easy_en, has_menu: text_halfcomma, width: 11, name: english, preview: false}
       # - {click: mode_switch_cn_or_en, has_menu: text_halfcomma, width: 11, name: mode_switch_cn_or_en, preview: false}
       - {click: return, width: 25, name: retur, composing: confirm, long_click: next, rect_preview: true, preview: false}
