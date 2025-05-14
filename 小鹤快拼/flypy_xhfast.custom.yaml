@@ -23,6 +23,7 @@ patch:
     inline_preedit: true             # 编码位是否嵌入候选框
     text_orientation: horizontal      # 候选文字横向(horizontal)/纵向(vertical)
     candidate_list_layout: linear     # 候选菜单横向(linear)/纵向(stacked)
+    # "style/horizontal": true   
 
   switches/+:
     - name: emoji
