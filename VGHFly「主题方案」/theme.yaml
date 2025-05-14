@@ -2,7 +2,7 @@
 # encoding: utf-8
 
 version: "5.0"
-name: VGHFly #方案名
+name: VGHFly快拼 #方案名
 author: 筋斗云 #作者
 
 #style，preset_styles，preset_font，preset_candidates，preset_color_schemas，preset_keyboards 下的default键名是个公共的配置，没有填的话都从default里面取。
