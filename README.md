@@ -22,3 +22,7 @@
 〉https://github.com/jqtmviyu/flypy
 
 〉https://github.com/cubercsl/rime-flypy
+
+〉https://github.com/amzxyz/rime_wanxiang_pro
+
+〉https://github.com/boomker/rime-fast-xhup
