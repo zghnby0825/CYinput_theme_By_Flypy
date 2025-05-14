@@ -129,13 +129,14 @@ patch:
       "@":
         - "@"
         # - "@xxx.com"
+        - "@163.com"
+        - "@139.com"
         - "@gmail.com"
         - "@foxmail.com"
         - "@outlook.com"
         - "@hotmail.com"
         - "@qq.com"
-        - "@163.com"
-        - "@139.com"
+
 
   speller/+:
     auto_commit: true                 # 二字词组加辅码唯一时则自动上屏
