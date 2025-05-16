@@ -16,7 +16,7 @@
 
 # 主题样式：
 
- ![主题样式](主题样式.png)
+ ![主题样式](主题样式.jpg)
 
 # 方案来源：
 〉https://github.com/jqtmviyu/flypy
