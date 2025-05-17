@@ -43,43 +43,38 @@ end
 local CR = {}
 local corrections_cache = nil  -- 用于缓存已加载的词典
 
--- 加载纠正词典函数
-local function load_corrections(file_path)
-    if corrections_cache then return corrections_cache end
+function CR.init(env)
+    local auto_delimiter = env.settings.auto_delimiter or " "
+    local corrections_file_path = rime_api.get_user_data_dir() .. "/cn_dicts/corrections.dict.yaml"
+
+    -- 使用设置好的 corrector_type 和样式
+    CR.style = env.settings.corrector_type or '{comment}'
+    if corrections_cache then
+        CR.corrections = corrections_cache
+        return
+    end
 
     local corrections = {}
-    local file = io.open(file_path, "r")
+    local file = io.open(corrections_file_path, "r")
 
     if file then
         for line in file:lines() do
             if not line:match("^#") then
-                -- 使用制表符分隔字段
                 local text, code, weight, comment = line:match("^(.-)\t(.-)\t(.-)\t(.-)$")
                 if text and code then
-                    -- 去除首尾空格
                     text = text:match("^%s*(.-)%s*$")
                     code = code:match("^%s*(.-)%s*$")
                     comment = comment and comment:match("^%s*(.-)%s*$") or ""
-                    -- 存储到 corrections 表中，以 code 为键
+                    -- 用自动分隔符替换空格
+                    comment = comment:gsub("%s+", auto_delimiter)
+                    code = code:gsub("%s+", auto_delimiter)
                     corrections[code] = { text = text, comment = comment }
                 end
             end
         end
         file:close()
         corrections_cache = corrections
-    end
-    return corrections
-end
-function CR.init(env)
-    local config = env.engine.schema.config
-    -- 初始化 corrector_type 和样式
-    env.settings.corrector_type = (env.settings.corrector_type and env.settings.corrector_type:gsub('^*', '')) or '{comment}'
-    CR.style = config:get_string("super_comment/corrector_type") or '{comment}'
-
-    -- 仅在 corrections_cache 为 nil 时加载词典
-    if not corrections_cache then
-        local corrections_file_path = rime_api.get_user_data_dir() .. "/cn_dicts/corrections.dict.yaml"
-        CR.corrections = load_corrections(corrections_file_path)
+        CR.corrections = corrections
     end
 end
 function CR.run(cand, env)
@@ -103,8 +98,9 @@ function FZ.run(cand, env, initial_comment)
     if env.settings.fuzhu_code_enabled and length <= env.settings.candidate_length then
         local comment_type = env.settings.comment_type
         local segments = {}
-        -- 先用空格将注释分成多个片段
-        for segment in initial_comment:gmatch("[^%s]+") do
+        -- 先用空格将分隔符分成多个片段
+        local auto_delimiter = env.settings.auto_delimiter or " "
+        for segment in string.gmatch(initial_comment, "[^" .. auto_delimiter .. "]+") do
             table.insert(segments, segment)
         end
         -- 根据 comment_type 决定处理方式
@@ -119,7 +115,7 @@ function FZ.run(cand, env, initial_comment)
             end
             -- 将提取的拼音片段用空格连接起来
             if #fuzhu_comments > 0 then
-                final_comment = table.concat(fuzhu_comments, " ")
+                final_comment = table.concat(fuzhu_comments, ",")
             end
         elseif comment_type == "tone" then
             -- 提取分号前面的所有字符
@@ -132,7 +128,7 @@ function FZ.run(cand, env, initial_comment)
             end
             -- 将提取的拼音片段用空格连接起来
             if #tone_comments > 0 then
-                final_comment = table.concat(tone_comments, " ")
+                final_comment = table.concat(tone_comments, ",")
             end
         end
     else
@@ -189,12 +185,15 @@ end
 local ZH = {}
 function ZH.init(env)
     local config = env.engine.schema.config
-
+    local delimiter = config:get_string('speller/delimiter') or " '"
+    local auto_delimiter = delimiter:sub(1, 1)
     -- 检查开关状态
     local is_fuzhu_enabled = env.engine.context:get_option("fuzhu_switch")
     local is_chaifen_enabled = env.engine.context:get_option("chaifen_switch")
     -- 设置辅助码功能
     env.settings = {
+        delimiter = delimiter,
+        auto_delimiter = auto_delimiter,
         corrector_enabled = config:get_bool("super_comment/corrector") or true,  -- 错音错词提醒功能
         corrector_type = config:get_string("super_comment/corrector_type") or "{comment}",  -- 提示类型
         fuzhu_code_enabled = is_fuzhu_enabled,  -- 辅助码提醒功能通过开关控制
