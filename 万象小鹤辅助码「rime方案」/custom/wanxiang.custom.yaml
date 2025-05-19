@@ -3,6 +3,13 @@ patch:
     __patch:
       - wanxiang.schema:/小鹤双拼            # 可选输入方案名称：自然码, 自然龙, 小鹤双拼, 搜狗双拼, 微软双拼, 智能ABC, 紫光双拼, 国标双拼
       - wanxiang.schema:/直接辅助            #辅助码升级为：直接辅助和间接辅助两种类型，都是句中任意，不同点在于直接辅助是nire=你  而间接则需要/引导  ni/re=你 ，在这个基础上直接辅助支持拼音后任意位置数字声调参与，间接辅助声调在/引导前参与
+  speller/algebra/__patch/+:
+      - mohuyin
+  # table_translator翻译器，支持自动上屏。例如 “zmhu”可以自动上屏“怎么回事”
+  speller/+:
+    auto_select: true
+    auto_select_pattern: ^[a-z]+/|^[a-df-zA-DF-Z]\w{3}|^e\w{4} 
+
   # 中英混合词汇，要与你的双拼类型一样
   cn_en/user_dict: en_dicts/flypy           # 可选的值有：en_dicts/pinyin， en_dicts/zrm， en_dicts/flypy ，en_dicts/mspy， en_dicts/sogou
   #通过下面的设置可以让你自己的文件引入而与仓库custom_phrase.txt不同，以后可以大胆覆盖更新
@@ -10,9 +17,9 @@ patch:
     #下面是候选数量，未来7890分别代表1234声，请候选长度不要大于6避免冲突
   menu/page_size: 6
   #下面用来改变你的windows小狼毫右下角软件图标
-  #schema/+:
-  #  icon: "icons/zhong.ico"
-  #  ascii_icon: "icons/ying.ico"
+  schema/+:
+    icon: "icons/zhong.ico"
+    ascii_icon: "icons/ying.ico"
   #下面这个可以改变tips上屏的按键
   key_binder/tips_key: "period"   #修改时候去default找，默认是句号
   #下面这个是修改快符的映射，按自己需求来

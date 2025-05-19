@@ -4,12 +4,15 @@
 #兼容词库，对于多字词汇两种读音的场景，手动维护到本表以及一些其他的杂项
 ---
 name: compatible
-version: "2025-05-12 18:59"
+version: "LTS"
 sort: by_weight
 ...
+公差	gōng;bs chā;yg	480
+好高	hào;nz gāo;wk	491
+好强	hào;nz qiáng;gi	485
 攒个	cuán;fr gè;rl	391
 攒个	zǎn;fr gè;rl	391
-背着	bēi;lo zhe;yo
+背着	bēi;lo zhe;yo	545
 外传	wài;xb chuán;rv	460
 长点儿	cháng;pn diǎn;lh ér;pv	293
 长点儿	zhǎng;pn diǎn;lh ér;pv	293
