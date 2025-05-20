@@ -286,16 +286,6 @@ preset_color_schemes:
         hilited_key_back_color: *bg-200
         key_text_color: *primary-300
         hilited_key_text_color: *text-100
-      send_ffhc:
-        key_back_color: *primary-100
-        hilited_key_back_color: *bg-200
-        key_text_color: *primary-300
-        hilited_key_text_color: *text-100 
-      send_grave:
-        key_back_color: *primary-100
-        hilited_key_back_color: *bg-200
-        key_text_color: *primary-300
-        hilited_key_text_color: *text-100   
       halfat:
         key_back_color: *primary-100
         hilited_key_back_color: *bg-200
@@ -307,7 +297,7 @@ preset_color_schemes:
         hilited_key_back_color: *bg-200
         key_text_color: *primary-300
         hilited_key_text_color: *text-100
-      
+
 
 
   dark:
@@ -431,7 +421,6 @@ preset_color_schemes:
         off_key_text_color: *bg-200
         on_key_back_color: *accent-100
         on_key_text_color: *accent-200
-      
 
       confirm:
         key_back_color: *primary-100
@@ -473,11 +462,6 @@ preset_color_schemes:
         hilited_key_back_color: *bg-200
         key_text_color: *primary-300
         hilited_key_text_color: *text-100
-      send_juhc:     
-        key_back_color: *primary-100
-        hilited_key_back_color: *bg-200
-        key_text_color: *primary-300
-        hilited_key_text_color: *text-100
       halfat:
         key_back_color: *primary-100
         hilited_key_back_color: *bg-200
@@ -489,7 +473,6 @@ preset_color_schemes:
         hilited_key_back_color: *bg-200
         key_text_color: *primary-300
         hilited_key_text_color: *text-100
-       
 
 
 
@@ -560,15 +543,11 @@ preset_keyboards:
       - {width: 2}
       - {click: backspace, width: 13, name: backspace, preview: false}
       #4
-      - {click: eisu_toggle_符_symbols, width: 15, name: symbol, preview: false, long_click: eisu_toggle_ABC_english, swipe_up: eisu_toggle_123_number} #符号/英文/数字
-      # - {click: eisu_toggle_123_number, has_menu: text_halfperiod, width: 13, name: number, preview: false} #数字
-      # - {width: 0.5}
-      - {click: send_dot,  swipe_up: "send_xpgh", name: send_dot, width: 10, preview: false} #斜杠+"."
-      - {click: space, width: 40, name: space, preview: false} #空格
-      - {click: send_ffhc,  swipe_up: "send_grave",  swipe_down: commit_halfperiod, name: send_ffhc, width: 10, preview: false} #引导+反查        
-      #      - {click: eisu_toggle_ABC_english_schema_easy_en, has_menu: text_halfcomma, width: 11, name: english, preview: false}
-      # - {click: mode_switch_cn_or_en, has_menu: text_halfcomma, width: 11, name: mode_switch_cn_or_en, preview: false}
-      - {click: return, width: 25, name: retur, composing: confirm, long_click: next, rect_preview: true, preview: false}
+      - {click: eisu_toggle_123_number, width: 15, has_menu: text_halfperiod, long_click: eisu_toggle_ABC_english, name: number, preview: false}
+      - {click: send_dot,  swipe_up: "send_xpgh", name: send_dot, width: 10, preview: false} #斜杠+"." 
+      - {click: space, width: 40, name: space, swipe_up: select_scecond, preview: false}
+      - {click: send_ffhc,  swipe_up: "send_grave",  swipe_down: commit_halfperiod, name: send_ffhc, width: 10, preview: false} #引导+反查
+      - {click: return, width: 25, name: return, swipe_up: select_third, composing: confirm, long_click: next, rect_preview: true, preview: false}
     width: 10
 
   english:
@@ -612,13 +591,10 @@ preset_keyboards:
       - {width: 2}
       - {click: backspace, width: 13, name: backspace}
       #4
-      - {click: eisu_toggle_符_symbols, width: 15, name: symbol, long_click: eisu_toggle_返回_default_schema_default, swipe_up: eisu_toggle_123_number} #加了后面这串和主键盘一样
-      # - {click: eisu_toggle_123_number, width: 10, name: number}
+      - {click: eisu_toggle_符_symbols, long_click: eisu_toggle_返回_default_schema_default, width: 15, name: symbol}
       - {click: commit_halfat, width: 10 }
       - {click: space, width: 40, name: space}
-      - {click: send_dot, width: 10 }      
-      #- {click: eisu_toggle_返回_default, width: 11, name: english}
-      # - {click: eisu_toggle_返回_default_schema_default, width: 11, name: english, preview: false}
+      - {click: send_dot, width: 10 }
       - {click: return, width: 25, name: return, composing: confirm}
   
   number:
@@ -652,11 +628,11 @@ preset_keyboards:
       - {click: commit_halfat, width: 17, height: 50, name: halfat}
 
       # - {width: 1}
-      - {click: eisu_toggle_符_dotsymbols, width: 17, height: 44, name: default}
-      - {click: eisu_toggle_返回_default, width: 22, height: 44}
-      - {click: commit_0, height: 44}
-      - {click: space, name: space, height: 44}
-      - {click: return, name: return, width: 17, height: 44, composing: confirm}
+      - {click: eisu_toggle_符_dotsymbols, width: 17, height: 46, name: default}
+      - {click: eisu_toggle_返回_default, width: 22, height: 46}
+      - {click: commit_0, height: 46}
+      - {click: space, name: space, height: 46}
+      - {click: return, name: return, width: 17, height: 46, composing: confirm}
 
   symbols:
     #。？！…（））；、～:[]ï`#：+*/×
@@ -842,7 +818,11 @@ preset_keys:
   send_3: {label: "", send: 3}
   send_2: {label: "", send: 2}
   send_dot: {label: ".", send: .}
-  
+  select_scecond: {label: "次选", send: 2}
+  select_third: {label: "三选", send: 3}
+  #换行
+  next: {label: "换行", commit: "\n"}
+
   #分号
   send_ffhc: {label: "♪", send: ;}
 
@@ -851,9 +831,6 @@ preset_keys:
 
   #斜杠
   send_xpgh: {label: "/", send: /}
-
-  #换行
-  next: {label: "换行", commit: "\n"}
 
 
   #eisu_toggle_schem
@@ -947,8 +924,8 @@ preset_keys:
   ##
   #引号 “”""＂＂「」『』
   # “”
-  text_fullquotationmark_left_default: {label: "〝", text: "〝〞{Left}{eisu_toggle_default}"}
-  text_full_quotation_mark_left_default_no_functional: {label: "〝", text: "〝〞{Left}{eisu_toggle_default}", functional: false}
+  text_fullquotationmark_left_default: {label: "“", text: "“”{Left}{eisu_toggle_default}"}
+  text_full_quotation_mark_left_default_no_functional: {label: "“", text: "“”{Left}{eisu_toggle_default}", functional: false}
   text_fullquotationmarkright_default: {label: "〞", text: "〞{eisu_toggle_default}"}
   text_full_quotation_mark_right_default_no_functional: {label: "〞", text: "〞{eisu_toggle_default}", functional: false}
   text_quotationmark_left_default: {label: "〝", text: "〝〞{Left}{eisu_toggle_default}"}
