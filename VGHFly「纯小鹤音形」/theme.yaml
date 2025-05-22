@@ -533,7 +533,7 @@ preset_keyboards:
       #3
       - {click: shift, has_menu: text_delimiter, width: 13, name: shift, preview: false}
       - {width: 2}
-      - {click: z, label: Z, swipe_up: commit_halfminus,  swipe_down: "-", long_click: [commit_halfminus, commit_Z, commit_z]}
+      - {click: z, label: Z, swipe_up: send_grave,  swipe_down: "-", long_click: [send_grave, commit_halfminus, commit_Z, commit_z]} # 反查
       - {click: x, label: X, swipe_up: commit_halfunderline,  swipe_down: "_", long_click: [commit_halfunderline, commit_X, commit_x]}
       - {click: c, label: C, swipe_up: commit_halfpoundsign,  swipe_down: "#", long_click: [commit_halfpoundsign, commit_C, commit_c]}
       - {click: v, label: V, swipe_up: commit_fullquestionmark,  swipe_down: "?", long_click: [commit_fullquestionmark, commit_V, commit_v]}
@@ -544,8 +544,9 @@ preset_keyboards:
       - {click: backspace, width: 13, name: backspace, preview: false}
       #4
       - {click: eisu_toggle_123_number, width: 15, has_menu: text_halfperiod, long_click: eisu_toggle_ABC_english, name: number, preview: false}
-      - {click: send_ffhc,  swipe_up: "send_grave",  swipe_down: commit_halfperiod, name: send_ffhc, width: 10, preview: false} #引导+反查 
-      - {click: space, width: 50, name: space, swipe_up: select_scecond, preview: false}
+      - {click: commit_fullcomma,  swipe_up: "?", name: commit_fullcomma, width: 10, preview: false} #逗号+问号
+      - {click: space, width: 40, name: space, swipe_up: select_scecond, preview: false}
+      - {click: send_ffhc,  swipe_up: "。", name: send_ffhc, width: 10, preview: false} #次选+句号
       - {click: return, width: 25, name: return, swipe_up: select_third, composing: confirm, long_click: next, rect_preview: true, preview: false}
     width: 10
 
@@ -1093,7 +1094,7 @@ preset_keys:
   commit_halfpoundsign: {label: "#", commit: "#"}
   commit_fullquestionmark: {label: "？", commit: "？"}
   commit_fullexclamationpoint: {label: "！", commit: "！"}
-  commit_fullcomma: {label: "，", commit: "，"}
+  commit_fullcomma: {label: ",", commit: "，"}
   commit_fulldot: {label: "。", commit: "。"}
   commit_halfquote: {label: "”", commit: "”"}
 
