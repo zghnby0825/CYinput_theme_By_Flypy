@@ -79,7 +79,10 @@ function CR.init(env)
 end
 function CR.run(cand, env)
     -- 使用候选词的 comment 作为 code，在缓存中查找对应的修正
-    local correction = corrections_cache[cand.comment]
+    local correction = nil
+    if corrections_cache then
+        correction = corrections_cache[cand.comment]
+    end
     if correction and cand.text == correction.text then
         -- 用新的注释替换默认注释
         local final_comment = CR.style:gsub("{comment}", correction.comment)
@@ -233,6 +236,7 @@ function ZH.func(input, env)
             if final_comment ~= initial_comment then
                 -- 有其他模块修改过注释，保留
             elseif input_str:match("//") and index == 1 then  --匹配pin造词状态
+            elseif input_str:match("^[VRNU/]") then
                 -- 输入包含 //，首选项保留注释
             else
                 -- 其他情况清空

@@ -1200,23 +1200,6 @@ function lunarJzl(y)
   return GzData
 end
 
--- 测试
--- print(lunarJzl(os.date("%Y%m%d%H")))
--- 公历转干支历实现结束
-
-------------农历转换函数--------------
-
-local function chinese_weekday(wday)
-  wday_num = tonumber(wday) + 1
-  chinese_weekdays = {"周日", "周一", "周二", "周三", "周四", "周五", "周六"}
-  return chinese_weekdays[wday_num]
-end
-local function chinese_weekday2(wday)
-  wday_num = tonumber(wday) + 1
-  chinese_weekdays = {"星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"}
-  return chinese_weekdays[wday_num]
-end
-
 local function time_to_num(time)
   pattern = "(%d+):(%d+) +([AP]M)"
   if string.match(time, pattern) ~= nil then
@@ -1249,11 +1232,6 @@ local GetLunarSichen = function(time, t)
     return LunarSichen[sj]
   end
 end
-
-------------------------------------
-------wirting by 98wubi Group-------
-------http://98wb.ys168.com/--------
-------------------------------------
 
 -- 十进制转二进制
 function Dec2bin(n)
@@ -1900,6 +1878,51 @@ local function nl_shengri2(y, m, d)
   return result
 end
 
+local function chinese_weekday(wday)
+    local chinese_weekdays = {"周日", "周一", "周二", "周三", "周四", "周五", "周六"}
+    return chinese_weekdays[wday + 1]
+end
+-- 获取中文星期（例如 "星期一"）都是为了利用现有函数
+local function chinese_weekday2(week_day_num)
+    local weekdays = {"星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"}
+    return weekdays[week_day_num + 1]
+end
+-- ISO 8601 计算：返回当前日期是第几周，不使用os.date(%w)
+local function iso_week_number(year, month, day)
+    local function date_to_julian(y, m, d)
+      -- 将年月日转换为儒略日（Julian Day Number）
+      if m <= 2 then
+        y = y - 1
+        m = m + 12
+      end
+      local A = math.floor(y / 100)
+      local B = 2 - A + math.floor(A / 4)
+      return math.floor(365.25 * (y + 4716)) + math.floor(30.6001 * (m + 1)) + d + B - 1524.5
+    end
+  
+    -- 获取当前日期的星期（ISO，周一为1，周日为7）
+    local function get_iso_weekday(y, m, d)
+      local t = os.time{year=y, month=m, day=d}
+      local w = tonumber(os.date("%w", t))
+      return (w == 0) and 7 or w
+    end
+  
+    local jd = date_to_julian(year, month, day)
+    local t = os.time{year=year, month=month, day=day}
+    local iso_day = get_iso_weekday(year, month, day)
+  
+    -- 计算该日期所在的星期的周四（ISO周的基准点）
+    local thursday_time = t + (4 - iso_day) * 86400
+    local thursday = os.date("*t", thursday_time)
+  
+    -- 计算周数
+    local first_thursday = os.time{year=thursday.year, month=1, day=4}
+    local first_thursday_weekday = get_iso_weekday(thursday.year, 1, 4)
+    local start_of_week1 = first_thursday - (first_thursday_weekday - 1) * 86400
+  
+    local week_number = math.floor((thursday_time - start_of_week1) / (7 * 86400)) + 1
+    return thursday.year, week_number
+end
 -- 公历节日表（国际节日+中国传统公历节日）
 local solar_holidays = {
   -- 国际节日
@@ -1933,11 +1956,7 @@ local lunar_holidays = {
   ["小年"] = "1223",    -- 腊月廿三
 }
 
--- 获取中文星期（例如 "星期一"）都是为了利用现有函数
-local function chinese_weekday2(week_day_num)
-  local weekdays = {"星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"}
-  return weekdays[week_day_num + 1]
-end
+
 
 -- 获取指定月的第n个指定星期几
 local function get_nth_weekday(year, month, weekday, n)
@@ -2072,6 +2091,116 @@ local function get_upcoming_holidays()
   return upcoming_holidays
 end
 
+-- 获取生日提醒信息的函数，可接受自定义生日设置
+function get_birthday_reminders(custom_settings)
+  -- 使用传入的自定义设置或默认全局设置
+  local settings = custom_settings or BIRTHDAY_SETTINGS
+  
+  -- 获取当前日期
+  local current_date = os.date("%Y%m%d")
+  local current_year = os.date("%Y")
+  local birthday_list = {}
+  
+  -- 计算公历生日倒计时
+  for _, birthday in ipairs(settings.solar or {}) do
+      local month, day, name, note = birthday[1], birthday[2], birthday[3], birthday[4]
+      -- 构建今年的生日日期
+      local this_year_birthday = string.format("%s%02d%02d", current_year, month, day)
+      -- 计算天数差
+      local days_left = diffDate(current_date, this_year_birthday)
+      
+      -- 如果生日已过，计算明年的生日
+      if days_left < 0 then
+          local next_year = tonumber(current_year) + 1
+          this_year_birthday = string.format("%s%02d%02d", next_year, month, day)
+          days_left = diffDate(current_date, this_year_birthday)
+      end
+      
+      -- 格式化日期显示
+      local formatted_date = string.format("%02d月%02d日", month, day)
+      -- 构建生日信息
+      local birthday_info
+      if note and note ~= "" then
+          birthday_info = string.format("%s(%s): %s < %d 天", 
+              name, note, formatted_date, days_left)
+      else
+          birthday_info = string.format("%s: %s < %d 天", 
+              name, formatted_date, days_left)
+      end
+      
+      -- 添加到生日列表
+      table.insert(birthday_list, {birthday_info, "(公历生日)", days_left})
+  end
+  
+  -- 计算农历生日倒计时
+  for _, birthday in ipairs(settings.lunar or {}) do
+    local month, day, name, note = birthday[1], birthday[2], birthday[3], birthday[4]
+    
+    -- 在函数内重新定义农历月份名和日期名
+    local cMonName = {"正月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "冬月", "腊月"}
+    local cDayName = {"初一", "初二", "初三", "初四", "初五", "初六", "初七", "初八", "初九", "初十",
+                      "十一", "十二", "十三", "十四", "十五", "十六", "十七", "十八", "十九", "二十",
+                      "廿一", "廿二", "廿三", "廿四", "廿五", "廿六", "廿七", "廿八", "廿九", "三十"}
+    
+    -- 格式化农历月日
+    local lunar_md = string.format("%02d%02d", month, day)
+  
+    -- 先计算今年的农历生日对应的公历日期
+    local lunar_date_str = current_year .. lunar_md
+    local solar_date = LunarDate2Date(lunar_date_str, 0)
+    
+    -- 提取公历日期中的月份和日期
+    local solar_month, solar_day = solar_date:match("(%d+)月(%d+)日")
+    solar_month = tonumber(solar_month)
+    solar_day = tonumber(solar_day)
+    
+    -- 构建今年农历生日对应的公历日期字符串
+    local this_year_birthday = string.format("%s%02d%02d", current_year, solar_month, solar_day)
+    -- 计算今年农历生日倒计时天数
+    local days_left = diffDate(current_date, this_year_birthday)
+    
+    -- 如果今年农历生日已过，计算明年的农历生日
+    if days_left < 0 then
+      local next_year = tonumber(current_year) + 1
+      lunar_date_str = next_year .. lunar_md
+      solar_date = LunarDate2Date(lunar_date_str, 0)
+      solar_month, solar_day = solar_date:match("(%d+)月(%d+)日")
+      solar_month = tonumber(solar_month)
+      solar_day = tonumber(solar_day)
+      days_left = nl_shengri2(current_year, lunar_md, "00")
+    end
+    
+    -- 格式化农历日期
+    local formatted_lunar = cMonName[month] .. cDayName[day]
+    local formatted_solar = string.format("%d月%d日", tonumber(solar_month), tonumber(solar_day))
+    
+    -- 构建农历生日信息
+    local birthday_info
+    if note and note ~= "" then
+        birthday_info = string.format("%s(%s): %s(%s) < %d 天", 
+            name, note, formatted_lunar, formatted_solar, days_left)
+    else
+        birthday_info = string.format("%s: %s(%s) < %d 天", 
+            name, formatted_lunar, formatted_solar, days_left)
+    end
+    
+    -- 添加到生日列表
+    table.insert(birthday_list, {birthday_info, "(农历生日)", days_left})
+  end
+  
+  -- 按天数排序
+  table.sort(birthday_list, function(a, b)
+      return a[3] < b[3]
+  end)
+  
+  -- 移除days_left数据，保持与原始数据结构兼容
+  for i, v in ipairs(birthday_list) do
+      birthday_list[i] = {v[1], v[2]}
+  end
+  
+  return birthday_list
+end
+
 --下面这个用于统一生成候选的逻辑
 local function generate_candidates(input, seg, candidates)
   for _, item in ipairs(candidates) do
@@ -2118,22 +2247,26 @@ local function translator(input, seg, env)
             {Date2LunarDate(os.date("%Y%m%d")) .. GetLunarSichen(os.date("%H"), 1), ""}
         }
         generate_candidates("date", seg, lunar_variants)
-    -- **星期候选项**
     elseif (input == "/xq" or input == "oxq") then
-        local num_weekday = os.date("第%W周")
+        local now = os.date("*t")
+        local _, weekno = iso_week_number(now.year, now.month, now.day)
+        local num_weekday = "(第" .. weekno .. "周)"
+    
         local week_variants = {
             {chinese_weekday(os.date("%w")), num_weekday},
             {chinese_weekday2(os.date("%w")), num_weekday},
-            {os.date("%a"), num_weekday},
-            {os.date("%A"), num_weekday}
         }
         generate_candidates("xq", seg, week_variants)
+    
     -- **第几周**
     elseif (input == "oww" or input == "/ww") then
-        local weekno = tostring(tonumber(os.date("%W")) + 1)
+        local now = os.date("*t")
+        local _, weekno = iso_week_number(now.year, now.month, now.day)
+        local weekno_str = tostring(weekno)
+
         local week_variants = {
-            {"W" .. weekno, "周"},
-            {"第" .. weekno .. "周", "周"}
+            {"W" .. weekno_str, ""},
+            {"第" .. weekno_str .. "周", ""}
         }
         generate_candidates("oww", seg, week_variants)
 
@@ -2142,7 +2275,7 @@ local function translator(input, seg, env)
         local jqs = GetNowTimeJq(os.date("%Y%m%d", os.time() - 3600 * 24 * 15))
         local jq_variants = {}
         for _, jq in ipairs(jqs) do
-            table.insert(jq_variants, {jq, "〔节气〕"})
+            table.insert(jq_variants, {jq, ""})  --空注释
         end
         generate_candidates("ojq", seg, jq_variants)
 
@@ -2150,7 +2283,7 @@ local function translator(input, seg, env)
     elseif (input == "/tt" or input == "ott") then
         local current_time = os.time()
         local timestamp_variants = {
-            {string.format('%d', current_time), "Unix Timestamp"}
+            {string.format('%d', current_time), "(时间戳)"}
         }
         generate_candidates("time", seg, timestamp_variants)
     -- **N日期**
@@ -2187,13 +2320,84 @@ local function translator(input, seg, env)
             if month and day then
                 local formatted_date = string.format("%02d月%02d日", tonumber(month), tonumber(day))
                 -- 输出格式：节日名称（格式化后的公历日期） 还有多少天
-                local holiday_summary = string.format("%s (%s) < %d 天", holiday[1], formatted_date, holiday[3])
+                local holiday_summary = string.format("%s (%s)", holiday[1], formatted_date, holiday[3])
+                local holiday_diff = string.format("< %d 天", holiday[3])  --差值显示到注释里面
                 -- 将节日信息加入候选项列表
-                table.insert(candidates, {holiday_summary, "节日信息"})
+                table.insert(candidates, {holiday_summary, holiday_diff})
             end
         end
         -- 使用 generate_candidates 函数生成候选项
         generate_candidates("holiday_summary", seg, candidates)
+    
+    -- **生日提醒**
+    elseif (input == "/sr" or input == "osr") then  
+        -- 从用户配置文件中读取生日设置
+        local config = env.engine.schema.config
+        local birthday_settings = {
+            solar = {},
+            lunar = {}
+        }
+
+        -- 读取公历生日（键值对格式）
+        local solar_map = config:get_map("birthday_reminder/solar_birthdays")
+        if solar_map then
+            -- 使用 keys() 方法获取所有键
+            local keys = solar_map:keys()
+            for _, key in ipairs(keys) do
+                -- 使用 get_value(key) 方法获取值
+                local value = solar_map:get_value(key):get_string()
+                
+                -- 解析值：日期和备注（格式："日期,备注" 或 "日期"）
+                local parts = {}
+                for part in string.gmatch(value, "[^,]+") do
+                    table.insert(parts, part)
+                end
+                
+                local date_str = parts[1] or ""
+                local note = parts[2] or ""
+                
+                -- 解析日期字符串
+                date_str = string.format("%04d", tonumber(date_str) or 0)
+                local month = tonumber(date_str:sub(1, 2))
+                local day = tonumber(date_str:sub(3, 4))
+                
+                -- 添加到生日设置
+                table.insert(birthday_settings.solar, {month, day, key, note})
+            end
+        end
+
+        -- 读取农历生日（键值对格式）
+        local lunar_map = config:get_map("birthday_reminder/lunar_birthdays")
+        if lunar_map then
+            -- 使用 keys() 方法获取所有键
+            local keys = lunar_map:keys()
+            for _, key in ipairs(keys) do
+                -- 使用 get_value(key) 方法获取值
+                local value = lunar_map:get_value(key):get_string()
+                
+                -- 解析值：日期和备注（格式："日期,备注" 或 "日期"）
+                local parts = {}
+                for part in string.gmatch(value, "[^,]+") do
+                    table.insert(parts, part)
+                end
+                
+                local date_str = parts[1] or ""
+                local note = parts[2] or ""
+                
+                -- 解析日期字符串
+                date_str = string.format("%04d", tonumber(date_str) or 0)
+                local month = tonumber(date_str:sub(1, 2))
+                local day = tonumber(date_str:sub(3, 4))
+                
+                -- 添加到生日设置
+                table.insert(birthday_settings.lunar, {month, day, key, note})
+            end
+        end
+
+        local candidates = get_birthday_reminders(birthday_settings)
+        -- 生成候选项
+        generate_candidates("birthday_reminders", seg, candidates)
+    
       -- 日历信息整合处理 `/day`
     elseif (input == "/day" or input == "oday") then
         -- 获取当前时间
@@ -2202,7 +2406,8 @@ local function translator(input, seg, env)
         local month = tonumber(os.date("%m", now))
         local day = tonumber(os.date("%d", now))
         local day_of_year = tonumber(os.date("%j", now))  -- 今年的第几天
-        local week_of_year = tonumber(os.date("%W", now)) + 1  -- 今年的第几周
+        local date_table = os.date("*t", now)
+        local _, week_of_year = iso_week_number(date_table.year, date_table.month, date_table.day)
         local week_of_month = math.ceil(tonumber(os.date("%d", now)) / 7)  -- 当月的第几周
     
         -- 计算一年的总天数，判断是否为闰年
@@ -2353,7 +2558,7 @@ local function translator(input, seg, env)
             string.format("◈ %s < [ %d ]天", upcoming_jqs[2], jieqi_days[2])
         -- 使用 generate_candidates 函数生成候选项
         local candidates = {
-            {summary, "日期信息整合"}
+            {summary, ""}  --空注释
         }
         -- 调用 generate_candidates 来提交候选项
         generate_candidates("day_summary", seg, candidates)

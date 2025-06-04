@@ -3154,7 +3154,7 @@ sort: by_weight
 安阳市	ān;bn yáng;eo shì;wj	252
 安阳县	ān;bn yáng;eo xiàn;qs	226
 安义县	ān;bn yì;dx xiàn;qs	191
-暗影堡	àn;od yǐng;op bǎo;rt	197
+暗影堡	àn;oo yǐng;op bǎo;rt	197
 安源区	ān;bn yuán;dx qū;kx	155
 安远县	ān;bn yuǎn;ze xiàn;qs	179
 安岳县	ān;bn yuè;qe xiàn;qs	222
@@ -10609,7 +10609,7 @@ sort: by_weight
 安兴庄村	ān;bn xīng;xb zhuāng;gt cūn;mc	1
 安崖底村	ān;bn yá;et dǐ;gd cūn;mc	1
 安阳滑县	ān;bn yáng;eo huá;dg xiàn;qs	326
-暗摇头村	àn;od yáo;ff tóu;dd cūn;mc	1
+暗摇头村	àn;oo yáo;ff tóu;dd cūn;mc	1
 安义古村	ān;bn yì;dx gǔ;uk cūn;mc	251
 安余梁村	ān;bn yú;rh liáng;dm cūn;mc	1
 安远沟村	ān;bn yuǎn;ze gōu;ds cūn;mc	125
@@ -13005,6 +13005,7 @@ sort: by_weight
 长岭沟村	cháng;pn lǐng;es gōu;ds cūn;mc	1
 长泠江村	cháng;pn líng;ds jiāng;dg cūn;mc	1
 长凌营村	cháng;pn líng;dw yíng;ck cūn;mc	1
+长陵园村	cháng;pn líng;ew yuán;ke cūn;mc	1
 长岭子村	cháng;pn lǐng;es zi;va cūn;mc	134
 长龙岗村	cháng;pn lóng;ul gǎng;ex cūn;mc	1
 长龙坪村	cháng;pn lóng;ul píng;tp cūn;mc	1
@@ -24760,7 +24761,7 @@ sort: by_weight
 岭源山庄	lǐng;es yuán;dx shān;lk zhuāng;gt	1
 凌兆新村	líng;dw zhào;ed xīn;lj cūn;mc	284
 岭子底村	lǐng;es zi;va dǐ;gd cūn;mc	1
-刘暗楼乡	liú;wd àn;od lóu;mn xiāng;vp	1
+刘暗楼乡	liú;wd àn;oo lóu;mn xiāng;vp	1
 刘安庄村	liú;wd ān;bn zhuāng;gt cūn;mc	125
 刘八里乡	liú;wd bā;pn lǐ;la xiāng;vp	1
 留百户村	liú;pt bǎi;ab hù;du cūn;mc	1
@@ -33977,11 +33978,11 @@ sort: by_weight
 太家沟村	tài;dd jiā;bu gōu;ds cūn;mc	1
 邰家湾村	tái;se jiā;bu wān;dg cūn;mc	1
 台家庄村	tái;sk jiā;bu zhuāng;gt cūn;mc	1
-太姥山镇	tài;dd lǎo;nb shān;lk zhèn;jb	266
 泰陵园村	tài;fu líng;ew yuán;ke cūn;mc	1
 台路沟乡	tái;sk lù;zk gōu;ds xiāng;vp	125
 太麻里乡	tài;dd má;gm lǐ;la xiāng;vp	402
 台贸十村	tái;sk mào;pr shí;al cūn;mc	35
+太姥山镇	tài;dd mǔ;nb shān;lk zhèn;jb	266
 泰南新村	tài;fu nán;ug xīn;lj cūn;mc	1
 台盘寺村	tái;sk pán;vm sì;tc cūn;mc	1
 太平坝乡	tài;dd píng;au bà;tr xiāng;vp	77
@@ -42957,7 +42958,6 @@ sort: by_weight
 张良沟村	zhāng;gi liáng;dg gōu;ds cūn;mc	1
 张良寨村	zhāng;gi liáng;dg zhài;bm cūn;mc	1
 张良庄村	zhāng;gi liáng;dg zhuāng;gt cūn;mc	1
-长陵园村	zhǎng;pn líng;ew yuán;ke cūn;mc	1
 张刘庄村	zhāng;gi liú;wd zhuāng;gt cūn;mc	1
 张六庄乡	zhāng;gi liù;wb zhuāng;gt xiāng;vp	1
 张龙岗村	zhāng;gi lóng;ul gǎng;ex cūn;mc	1

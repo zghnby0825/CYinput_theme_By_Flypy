@@ -70,7 +70,7 @@ sort: by_weight
 靉	ài;yw	113
 嗳	ǎi;ky	113
 硋	ài;ur	105
-懓	ài;uw	97
+懓	ài;xw	97
 嘊	ái;kt	92
 鱫	ài;aw	92
 鑀	ài;jw	92
@@ -183,7 +183,7 @@ sort: by_weight
 按	àn;fn	812
 安	ān;bn	784
 案	àn;bm	771
-暗	àn;od	685
+暗	àn;oo	685
 岸	àn;eg	668
 氨	ān;qn	589
 俺	ǎn;rd	580
@@ -234,7 +234,7 @@ sort: by_weight
 錌	àn;jg	23
 𩽾	ān;an	1
 䅁	àn;bh	1
-㟁	àn;wg	1
+㟁	àn;eg	1
 䢿	ān;be	1
 偣	ān;ro	1
 儑	àn;rh	1
@@ -603,7 +603,7 @@ sort: by_weight
 𢠭	bā;ry	1
 𢺞	bǎ;fo	1
 𢻷	bā;by	1
-𣬷	ba;bm	1
+𣬷	bā;bm	1
 𣬶	bā;mb	1
 𤜕	bà;uo	1
 𤜱	bā;qb	1
@@ -836,7 +836,7 @@ sort: by_weight
 鞤	bāng;tg	68
 艕	bàng;vf	50
 稖	bàng;hk	38
-縍	bāng;sf	23
+縍	bāng;yf	23
 邫	bāng;fb	1
 捠	bāng;fb	1
 䧛	bàng;ef	1
@@ -846,7 +846,7 @@ sort: by_weight
 旁	bàng;wf	1
 榜	bàng;mf	1
 硥	bàng;ud	1
-縍	bàng;sf	1
+縍	bàng;yf	1
 蚄	bàng;if	1
 蛖	bàng;id	1
 㔙	bǎng;bl	1
@@ -1028,7 +1028,7 @@ sort: by_weight
 𩿓	bào;nn	1
 𪏶	bào;hs	1
 𪧕	bǎo;bf	1
-𠦀	bǎo;	1
+𠦀	bǎo;uu	1
 被	bèi;py	819
 北	běi;lb	796
 备	bèi;wt	781
@@ -3646,6 +3646,7 @@ sort: by_weight
 𪉨	chāng;lo	1
 𪤝	chǎng;et	1
 𫊪	cháng;ii	1
+䲝	chāng;av	1
 超	chāo;tk	776
 朝	cháo;uo	719
 炒	chǎo;hu	702
@@ -3969,6 +3970,7 @@ sort: by_weight
 𪕁	chén;jj	1
 𫝕	chén;in	1
 𬘭	chēn;sm	1
+𠱸	chén;	1
 成	chéng;wv	862
 程	chéng;hw	808
 城	chéng;ti	791
@@ -4181,6 +4183,7 @@ sort: by_weight
 𫄺	chéng;fw	1
 𫔘	chēng;ml	1
 𬲜	chēng;ry	1
+𦉘	chēng;	1
 吃	chī;kv	871
 持	chí;fc	803
 池	chí;dy	688
@@ -5897,7 +5900,7 @@ sort: by_weight
 𥼛	cuì;mm	1
 𥼺	cuǐ;mu	1
 𦙈	cuì;ou	1
-𦦣	cuì;by	1
+𦦣	cuì;jy	1
 𧎃	cuì;bi	1
 𧑎	cuì;ii	1
 𧚥	cuì;py	1
@@ -6024,6 +6027,7 @@ sort: by_weight
 𪒙	cuō;hy	1
 𪘓	cuó;rk	1
 棤	cuò;mo	1
+𢵄	cuò;	1
 打	dǎ;fd	904
 大	dà;un	800
 达	dá;zd	788
@@ -6731,6 +6735,7 @@ sort: by_weight
 𤷙	dé;bc	1
 𧊇	dé;ri	1
 𨁽	dé;zc	1
+𢱕	dé;	1
 得	děi;ic	614
 嘚	dēi;kc	1
 䮻	děi;mc	1
@@ -8043,7 +8048,7 @@ sort: by_weight
 堆	duī;tf	654
 兑	duì;be	619
 對	duì;yc	534
-怼	duì;dx	503
+怼	duì;yx	503
 隊	duì;eu	430
 対	duì;wc	409
 碓	duì;uf	380
@@ -8145,6 +8150,7 @@ sort: by_weight
 𪌤	duī;lk	1
 𪒛	duì;hu	1
 𪒡	duì;hz	1
+𩛍	duī;	1
 顿	dùn;tr	700
 盾	dùn;po	648
 吨	dūn;kt	640
@@ -9634,6 +9640,7 @@ sort: by_weight
 𨛔	fǒu;be	1
 𩂆	fǒu;yb	1
 𫒘	fǒu;jf	1
+𠳝	fǒu;	1
 服	fú;oy	811
 复	fù;pw	780
 府	fǔ;gc	748
@@ -10179,6 +10186,7 @@ sort: by_weight
 𫙉	fǔ;gx	1
 𫝊	fù;rc	1
 𫞶	fǔ;ph	1
+𫛡	fú;	1
 尬	gà;yl	607
 咖	gā;kk	598
 噶	gá;kv	571
@@ -12937,6 +12945,7 @@ sort: by_weight
 𪠁	hé;re	1
 𪡛	hé;kk	1
 𪱳	hé;mk	1
+𠺪	hě;	1
 黑	hēi;lh	755
 嘿	hēi;kh	633
 黒	hēi;lh	453
@@ -15595,6 +15604,7 @@ sort: by_weight
 𫞴	jì;xx	1
 㴔	jí;dx	1
 嵴	jí;eo	1
+𠽤	jī;	1
 加	jiā;lk	898
 家	jiā;bu	871
 价	jià;rl	824
@@ -18060,6 +18070,7 @@ sort: by_weight
 𫈹	jú;ci	1
 俱	jū;rb	1
 锔	jú;jk	1
+𢤹	jù;	1
 卷	juǎn;jv	689
 卷	juàn;jv	633
 捐	juān;fo	621
@@ -19037,6 +19048,7 @@ sort: by_weight
 𪽇	kē;tj	1
 𫟭	kè;be	1
 颏	ké;wr	1
+𡲢	kē;	1
 剋	kēi;ud	1
 尅	kēi;uc	1
 肯	kěn;vo	715
@@ -20097,6 +20109,7 @@ sort: by_weight
 𫏌	lái;zl	1
 𫓳	lǎi;jv	1
 𫝫	lái;nl	1
+𪮶	lài;	1
 兰	lán;bs	744
 蓝	lán;cm	705
 览	lǎn;le	678
@@ -21368,6 +21381,9 @@ sort: by_weight
 𭀖	lí;wd	1
 蜊	lí;id	1
 蠡	lí;vi	1
+𢃇	lǐ;	1
+𥅈	lì;	1
+𫄫	lì;	1
 俩	liǎ;rl	637
 倆	liǎ;rr	334
 连	lián;zi	766
@@ -21963,6 +21979,7 @@ sort: by_weight
 𩭌	liè;aj	1
 𩼭	liè;ea	1
 峛	liè;ed	1
+𫄫	liè;	1
 林	lín;mm	763
 临	lín;la	720
 邻	lín;re	642
@@ -22543,7 +22560,9 @@ sort: by_weight
 𪕚	liú;ja	1
 𫞉	liǔ;ml	1
 镏	liù;jt	1
-咯	lo;kk	1
+𠮩	liū;	1
+𤠑	liú;	1
+咯	lo;kk	812
 龙	lóng;ul	745
 隆	lóng;eu	667
 笼	lóng;vl	614
@@ -24286,6 +24305,7 @@ sort: by_weight
 𪎭	méi;gu	1
 𪾛	mèi;dm	1
 𫟈	měi;bp	1
+𦳀	mèi;	1
 们	men;rm	861
 门	mén;dv	798
 闷	mèn;mx	624
@@ -25711,6 +25731,7 @@ sort: by_weight
 𪌅	nà;ln	1
 𪐀	nǎ;hx	1
 𪗝	nà;vn	1
+𠸎	nā;	1
 奶	nǎi;nn	723
 耐	nài;ec	673
 奈	nài;dx	652
@@ -28234,6 +28255,7 @@ sort: by_weight
 𪕒	píng;jk	1
 𪥈	píng;dp	1
 𪾘	píng;jm	1
+𠹶	pīng;	1
 破	pò;uy	737
 婆	pó;dn	681
 坡	pō;ty	663
@@ -29075,6 +29097,7 @@ sort: by_weight
 𪦧	qí;nl,ny	1
 𫅆	qī;kn	1
 𬨂	qí;iu	1
+𠺪	qì;	1
 恰	qià;xk	643
 洽	qià;dk	551
 卡	qiǎ;ub	545
@@ -29473,6 +29496,7 @@ sort: by_weight
 𫑍	qiǎn;zw	1
 𫝐	qián;bd	1
 靬	qián;gg	1
+𩝡	qiǎn;	1
 强	qiáng;gi	874
 枪	qiāng;mv	676
 抢	qiǎng;fv	676
@@ -30074,6 +30098,7 @@ sort: by_weight
 𪙟	qǐn;va	1
 𪧭	qīn;bj	1
 梣	qín;mv	1
+𢫏	qīn;	1
 请	qǐng;yo	864
 情	qíng;xo	791
 清	qīng;do	790
@@ -30470,6 +30495,7 @@ sort: by_weight
 𪓰	qiū;bv	1
 𪖛	qiù;zq	1
 𫠑	qiū;ay	1
+𫚧	qiú;	1
 去	qù;ts	893
 区	qū;kx	825
 取	qǔ;ey	785
@@ -31291,6 +31317,7 @@ sort: by_weight
 𩵕	rèn;ad,ar	1
 𪔺	rèn;jr	1
 葚	rèn;cv	1
+𣏴	rén;	1
 仍	réng;rn	714
 扔	rēng;fn	607
 礽	réng;pn	341
@@ -35353,6 +35380,7 @@ sort: by_weight
 𪐝	tài;hd	1
 𪐥	tài;ht	1
 𪒴	tái;ht	1
+𧘹	tāi;	1
 谈	tán;yh	722
 探	tàn;fm	706
 坦	tǎn;ta	679
@@ -38794,6 +38822,7 @@ sort: by_weight
 𪶮	wū;dx	1
 𫊣	wú;ha	1
 𫝀	wǔ;va	1
+𭴊	wú;	1
 系	xì;px	819
 习	xí;vd	803
 喜	xǐ;uk	800
@@ -39416,6 +39445,7 @@ sort: by_weight
 𫘬	xí;md	1
 𫠃	xí;ey	1
 咥	xì;kt	1
+𥱊	xí;	1
 下	xià;ab	870
 夏	xià;aw	717
 虾	xiā;ix	680
@@ -40241,6 +40271,7 @@ sort: by_weight
 𩡠	xiāng;ho	1
 𩾬	xiáng;ng	1
 𪂼	xiāng;mn	1
+𣚺	xiàng;	1
 小	xiǎo;ld	858
 效	xiào;ww	787
 消	xiāo;do	775
@@ -44485,6 +44516,8 @@ sort: by_weight
 𫟌	yì;cb	1
 𰁜	yì;ld	1
 踦	yǐ;zk	1
+𡃀	yì;	1
+𢯎	yī;	1
 因	yīn;kd	835
 音	yīn;lo	785
 引	yǐn;gl	770
@@ -50044,6 +50077,7 @@ sort: by_weight
 𩬳	zhuǐ;ar	1
 𪋇	zhuī;gf	1
 𪠰	zhuì;yd	1
+𩺬	zhuī;	1
 准	zhǔn;df	785
 準	zhǔn;du	432
 谆	zhūn;yz	419
@@ -51149,7 +51183,6 @@ sort: by_weight
 𫑘	无;	1
 𫔰	无;	1
 𫙮	无;	1
-𫚧	无;	1
 𫛩	无;	1
 𰡉	无;	1
 𱅛	无;	1
@@ -51165,7 +51198,6 @@ sort: by_weight
 䇄	无;	1
 䓪	无;	1
 䨇	无;ry	1
-䲝	无;av	1
 𠄳	无;	1
 𠉞	无;	1
 𠐤	无;	1
@@ -51222,7 +51254,6 @@ sort: by_weight
 𪩷	无;	1
 𪪼	无;	1
 𪮷	无;	1
-𪮶	无;	1
 𪲎	无;	1
 𪵱	无;	1
 𪹚	无;	1
@@ -51256,7 +51287,6 @@ sort: by_weight
 𫚞	无;	1
 𫚜	无;	1
 𫛜	无;	1
-𫛡	无;	1
 𬏟	无;	1
 𭻾	无;	1
 𰉬	无;	1
@@ -53933,7 +53963,6 @@ sort: by_weight
 𠮞	无;	1
 𠮤	无;	1
 𠮥	无;	1
-𠮩	无;	1
 𠮧	无;	1
 𠮪	无;	1
 𠮮	无;	1
@@ -54046,7 +54075,6 @@ sort: by_weight
 𠱺	无;	1
 𠱹	无;	1
 𠱻	无;	1
-𠱸	无;	1
 𠲀	无;	1
 𠱼	无;	1
 𠱽	无;	1
@@ -54101,7 +54129,6 @@ sort: by_weight
 𠳔	无;	1
 𠳘	无;	1
 𠳚	无;	1
-𠳝	无;	1
 𠳖	无;	1
 𠳛	无;	1
 𠳙	无;	1
@@ -54310,7 +54337,6 @@ sort: by_weight
 𠸋	无;	1
 𠸊	无;	1
 𠸑	无;	1
-𠸎	无;	1
 𠸐	无;	1
 𠸓	无;	1
 𠸒	无;	1
@@ -54379,7 +54405,6 @@ sort: by_weight
 𠹷	无;	1
 𠹺	无;	1
 𠹹	无;	1
-𠹶	无;	1
 𠹻	无;	1
 𠹸	无;	1
 𠹾	无;	1
@@ -54417,7 +54442,6 @@ sort: by_weight
 𠺫	无;	1
 𠺩	无;	1
 𠺬	无;	1
-𠺪	无;	1
 𠺭	无;	1
 𠺵	无;	1
 𠺲	无;	1
@@ -54556,7 +54580,6 @@ sort: by_weight
 𠽞	无;	1
 𠽛	无;	1
 𠽠	无;	1
-𠽤	无;	1
 𠽢	无;	1
 𠽥	无;	1
 𠽭	无;	1
@@ -54790,7 +54813,6 @@ sort: by_weight
 𡂼	无;	1
 𡂾	无;	1
 𡃊	无;	1
-𡃀	无;	1
 𡃉	无;	1
 𡃎	无;	1
 𡃋	无;	1
@@ -56927,7 +56949,6 @@ sort: by_weight
 𡲟	无;	1
 𡲝	无;	1
 𡲜	无;	1
-𡲢	无;	1
 𡲤	无;	1
 𡲡	无;	1
 𡲩	无;	1
@@ -57606,7 +57627,6 @@ sort: by_weight
 𢃃	无;	1
 𢃄	无;	1
 𢃅	无;	1
-𢃇	无;	1
 𢃆	无;	1
 𢃈	无;	1
 𢃊	无;	1
@@ -58998,7 +59018,6 @@ sort: by_weight
 𢤺	无;	1
 𢤸	无;	1
 𢤷	无;	1
-𢤹	无;	1
 𢤶	无;	1
 𢤼	无;	1
 𢤻	无;	1
@@ -59267,7 +59286,6 @@ sort: by_weight
 𢫗	无;	1
 𢫒	无;	1
 𢫖	无;	1
-𢫏	无;	1
 𢫑	无;	1
 𢫜	无;	1
 𢫛	无;	1
@@ -59449,7 +59467,6 @@ sort: by_weight
 𢯂	无;	1
 𢯊	无;	1
 𢯈	无;	1
-𢯎	无;	1
 𢯆	无;	1
 𢯐	无;	1
 𢯒	无;	1
@@ -59554,7 +59571,6 @@ sort: by_weight
 𢱒	无;	1
 𢱔	无;	1
 𢱖	无;	1
-𢱕	无;	1
 𢱜	无;	1
 𢱗	无;	1
 𢱝	无;	1
@@ -59724,7 +59740,6 @@ sort: by_weight
 𢵆	无;	1
 𢵃	无;	1
 𢵅	无;	1
-𢵄	无;	1
 𢵂	无;	1
 𢵊	无;	1
 𢵋	无;	1
@@ -60922,7 +60937,6 @@ sort: by_weight
 𣏱	无;	1
 𣏳	无;	1
 𣏵	无;	1
-𣏴	无;	1
 𣏲	无;	1
 𣏸	无;	1
 𣏻	无;	1
@@ -61420,7 +61434,6 @@ sort: by_weight
 𣚷	无;	1
 𣚹	无;	1
 𣚸	无;	1
-𣚺	无;	1
 𣚿	无;	1
 𣚻	无;	1
 𣚾	无;	1
@@ -64432,7 +64445,6 @@ sort: by_weight
 𤠔	无;	1
 𤠒	无;	1
 𤠕	无;	1
-𤠑	无;	1
 𤠡	无;	1
 𤠜	无;	1
 𤠢	无;	1
@@ -65957,7 +65969,6 @@ sort: by_weight
 𥅅	无;	1
 𥄾	无;	1
 𥅆	无;	1
-𥅈	无;	1
 𥅇	无;	1
 𥅊	无;	1
 𥅉	无;	1
@@ -67733,7 +67744,6 @@ sort: by_weight
 𥱆	无;	1
 𥱉	无;	1
 𥱇	无;	1
-𥱊	无;	1
 𥱋	无;	1
 𥱍	无;	1
 𥱅	无;	1
@@ -68713,7 +68723,6 @@ sort: by_weight
 𦉌	无;	1
 𦉔	无;	1
 𦉒	无;	1
-𦉘	无;	1
 𦉞	无;	1
 𦉖	无;	1
 𦉗	无;	1
@@ -70368,7 +70377,6 @@ sort: by_weight
 𦲽	无;	1
 𦲿	无;	1
 𦲾	无;	1
-𦳀	无;	1
 𦳂	无;	1
 𦳒	无;	1
 𦳍	无;	1
@@ -71860,7 +71868,6 @@ sort: by_weight
 𧘵	无;	1
 𧘸	无;	1
 𧘴	无;	1
-𧘹	无;	1
 𧘷	无;	1
 𧘼	无;	1
 𧘺	无;	1
@@ -76749,7 +76756,6 @@ sort: by_weight
 𩛈	无;	1
 𩛐	无;	1
 𩛔	无;	1
-𩛍	无;	1
 𩛓	无;	1
 𩛖	无;	1
 𩛕	无;	1
@@ -76822,7 +76828,6 @@ sort: by_weight
 𩝙	无;	1
 𩝢	无;	1
 𩝜	无;	1
-𩝡	无;	1
 𩝧	无;	1
 𩝬	无;	1
 𩝪	无;	1
@@ -77838,7 +77843,6 @@ sort: by_weight
 𩺪	无;	1
 𩺨	无;	1
 𩺩	无;	1
-𩺬	无;	1
 𩺭	无;	1
 𩺮	无;	1
 𩺳	无;	1
@@ -81270,7 +81274,6 @@ sort: by_weight
 𫄥	无;	1
 𫄤	无;	1
 𫄢	无;	1
-𫄫	无;	1
 𫄭	无;	1
 𫄯	无;	1
 𫄹	无;	1
@@ -91847,7 +91850,6 @@ sort: by_weight
 𭴉	无;	1
 𭲑	无;db	1
 𭴌	无;	1
-𭴊	无;	1
 𭴈	无;	1
 𭴋	无;	1
 𭴍	无;	1

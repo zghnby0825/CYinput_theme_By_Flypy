@@ -6,6 +6,7 @@
 --     - lua_processor@*super_tips*S              手机电脑有着不同的逻辑,除了编码匹配之外,电脑支持光标高亮匹配检索,手机只支持首选候选匹配
 --     - lua_filter@*super_tips*M                  
 --     key_binder/tips_key: "slash"  #上屏按键配置
+local is_mobile_device = require("wanxiang")
 local _db_pool = _db_pool or {}  -- 数据库池
 -- 获取或创建 LevelDb 实例，避免重复打开
 local function wrapLevelDb(dbname, mode)
@@ -32,7 +33,7 @@ local function ensure_dir_exist(dir)
 
     if sep == "/" then
         local cmd = 'mkdir -p "'..dir..'" 2>/dev/null'
-	local success = os.execute(cmd)
+    local success = os.execute(cmd)
     end
 end
 
@@ -43,6 +44,7 @@ function M.init(env)
     local user_lua_dir = rime_api.get_user_data_dir() .. "/lua"
     if dist ~= "hamster" and dist ~= "Weasel" then
         ensure_dir_exist(user_lua_dir)
+        ensure_dir_exist(user_lua_dir .. "/tips")
     end
 
     local db = wrapLevelDb('lua/tips', true)
@@ -82,10 +84,10 @@ function M.init(env)
     file:close()
 
     -- 加载用户覆盖文件
-    local user_path = rime_api.get_user_data_dir() .. "/lua/tips/tips_user.txt"
-    local user_file = io.open(user_path, "r")
-    if user_file then
-        for line in user_file:lines() do
+    local user_override_path = rime_api.get_user_data_dir() .. "/lua/tips/tips_user.txt"
+    local override_file = io.open(user_override_path, "r")
+    if override_file then
+        for line in override_file:lines() do
             if not line:match("^#") then
                 local value, key = line:match("([^\t]+)\t([^\t]+)")
                 if value and key then
@@ -93,27 +95,13 @@ function M.init(env)
                 end
             end
         end
-        user_file:close()
+        override_file:close()
     end
 
     collectgarbage()
     db:close()
 end
--- 判断是否为手机设备，通过路径来判断（可以根据实际路径修改判断方式）
-local function is_mobile_device()
-    local dist = rime_api.get_distribution_code_name() or ""
-    local user_data_dir = rime_api.get_user_data_dir() or ""
-    -- 主判断：trime 或 hamster
-    if dist == "trime" or dist == "hamster" or dist == "Squirrel" then
-        return true
-    end
-    -- 补充判断：路径中出现 mobile/Android/手机特征，/data/storage/el2/随机字符串/group是鸿蒙的路径
-    local lower_path = user_data_dir:lower()
-    if lower_path:find("/android/") or lower_path:find("/mobile/") or lower_path:find("/sdcard/") or lower_path:find("/data/storage/") then
-        return true
-    end
-    return false
-end
+
 -- 滤镜：设置提示内容
 function M.func(input, env)
     local segment = env.engine.context.composition:back()
@@ -124,7 +112,7 @@ function M.func(input, env)
     local is_super_tips = env.settings.super_tips
     local db = wrapLevelDb("lua/tips", false)
     -- 手机设备：读取数据库并输出候选
-    if is_mobile_device() then
+    if is_mobile_device.is_mobile_device() then
         local input_text = env.engine.context.input or ""
         local stick_phrase = db:fetch(input_text)
 
@@ -172,7 +160,7 @@ function S.func(key, env)
     if not segment then
         return 2
     end
-    if string.match(input_text, "^V") or string.match(input_text, "^R") or string.match(input_text, "^N") or string.match(input_text, "^U") or string.match(input_text, "^/") then
+    if string.match(input_text, "^[VRNU/]") then
         return 2
     end
     local db = wrapLevelDb("lua/tips", false)
@@ -181,7 +169,7 @@ function S.func(key, env)
     local tipspc
     local tipsph
     -- 电脑设备：直接处理按键事件并使用数据库
-    if not is_mobile_device() then
+    if not is_mobile_device.is_mobile_device() then
         local input_text = context.input or ""
         local stick_phrase = db:fetch(input_text)
         local selected_cand = context:get_selected_candidate()

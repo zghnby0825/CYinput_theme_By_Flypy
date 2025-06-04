@@ -2,15 +2,15 @@
 # encoding: utf-8
 #############DIY你想要的方案组合,试试搭配一个自然码+墨奇辅助的方案吧！###########################
 set_shuru_schema:              #配置此项就是选择什么输入法,同时拆分反查和中英文混输也将匹配该输入方案
-  __include: 小鹤双拼             #可选解码规则有   自然码, 自然龙, 汉心龙, 小鹤双拼, 搜狗双拼, 微软双拼, 智能ABC, 紫光双拼， 国标双拼， 龙三 选择一个填入
+  __include: 自然码             #可选解码规则有   自然码, 自然龙, 汉心龙, 小鹤双拼, 搜狗双拼, 微软双拼, 智能ABC, 紫光双拼， 国标双拼， 龙三 选择一个填入
 set_fuzhu_schema:              #配置此项就是选择什么输入法,同时拆分反查和中英文混输也将匹配该输入方案
   __include: 直接辅助           #可选解码规则有:  直接辅助, 间接辅助  选择一个填入
 set_cn_en:                     #中英混输
-  user_dict: en_dicts/flypy   #可选的值有：en_dicts/pinyin， en_dicts/zrm， en_dicts/flypy ，en_dicts/mspy， en_dicts/sogou， en_dicts/pinyin
+  user_dict: en_dicts/zrm   #可选的值有：en_dicts/pinyin， en_dicts/zrm， en_dicts/flypy ，en_dicts/mspy， en_dicts/sogou， en_dicts/pinyin
 super_comment:                 # 超级注释模块，子项配置 true 开启，false 关闭
   candidate_length: 1          # 候选词辅助码提醒的生效长度，0为关闭  但同时清空其它，应当使用上面开关来处理
   corrector_type: "{comment}"  # 换一种显示类型，比如"({comment})" 
-  comment_type: tone          # 可以选择注释里显示辅助码或者是声调全拼：fuzhu , tone
+  comment_type: fuzhu          # 可以选择注释里显示辅助码或者是声调全拼：fuzhu , tone
 __include: octagram            #启用语言模型
 #__include: set_chord_composer  #启用并击处理，不懂得不要开启就是了
 ########################以下是方案配置######################################################
@@ -41,13 +41,12 @@ switches:
   - name: ascii_punct                  # 中英标点
     states: [ ¥, $ ]
   - options: [ s2s, s2t, s2hk, s2tw ]  # 简繁转换开关组，可以在一个空选项和多个实际“- simplifier@s2hk”引入的项目之前切换，这是一个开关组，你可以将其中任意一个s2s等设置为toggle快捷键，多次按下将轮询
-    reset: 0
+#    reset: 0
     states: [ 简体, 通繁, 港繁, 臺繁 ]
   - name: full_shape                   #全角、半角字符输出
     states: [ 半, 全 ]
   - name: emoji                        #候选出现emoji滤镜，会显示在相应的候选后面，万象侧重于tips提示，避免候选被占用，因此默认为reset: 0，归属opencc emoji滤镜
     states: [ 🙃, 😄 ]
-    reset: 0
   - name: chinese_english              #候选进入翻译模式滤镜，会显示在相应的候选后面，万象侧重于tips提示，避免候选被占用，快捷键配套ctrl+e,归属opencc 翻译滤镜
     states: [ 译, 翻 ]
   - name: tone_display                 #开启后在输入编码的位置实时转换为带声调全拼，不开启则采用系统配置，快捷键配套ctrl+s,影响的是preedit_format,归属：super_preedit.lua
@@ -58,13 +57,10 @@ switches:
     states: [ 分, 拆 ]
   - name: charset_filter               #字符集过滤，默认开启8105通规显示，即小字集，可通过开关实时开启全字集，快捷键配套ctrl+g,归属：chars_filter.lua
     states: [ 小, 大 ]
-    reset: 0
   - name: super_tips                   #开启后在输入编码后面的提示区显示实时的提示数据，受tips数据库影响，表情、翻译、车牌、符号等对应关系数据，并可实现句号上屏，不开启则默认，影响的是segment.prompt参数，归属：super_tips.lua
     states: [ off, tips ]
-    reset: 1
   - name: prediction                   #开启后输入上屏后继续弹出预测数据候选展示例如输入：你在 ，预测候选： 哪里 干嘛 吗 做等等，predictor配置区可设置详细参数，归属：predict内置插件
     states: [ 测, 预 ]
-    reset: 0
   - name: search_single_char          #多体现在编码重合但候选有单字或者多字的情况`引导的辅码查词时是否单字优先，全拼常见，类似于特定编码情况下、反查状态下的调序能力。归属：search.lua
     abbrev: [词, 单]
     states: [正常, 单字]
@@ -81,6 +77,7 @@ engine:
     - lua_processor@*quick_symbol_text     #快符引导以及重复上屏，配合quick_symbol_text顶层配置清单定义扩展按键
     - lua_processor@*super_tips*S          #超级提示模块：表情、简码、翻译、化学式、等等靠你想象
     - lua_processor@*limit_repeated        #用于限制最大候选长度以及最大重复输入声母编码长度，避免性能异常
+    - lua_processor@*backspace_limit       #防止连续 Backspace 在编码为空时删除已上屏内容
     - lua_processor@*userdb_sync_delete    #危险操作：通过输入 /del 触发,用于清理自定义同步目录下txt用户词典里被标记c<0的词条，操作步骤：必须先同步、再执行/del、再去部署刷新状态、再去同步回收词典，完成动作。
     - ascii_composer                       #处理英文模式及中英文切换
     - recognizer                           #与 matcher 搭配，处理符合特定规则的输入码，如网址、反查等 tags
@@ -131,6 +128,7 @@ engine:
     - lua_filter@*search@wanxiang_radical           #部件拆字辅码放在简繁转换之后
     - lua_filter@*super_tips*M                      #超级提示模块：表情、简码、翻译、化学式、等等靠你想象
     - lua_filter@*super_comment                     #超级注释模块，支持错词提示、辅助码显示，部件组字读音注释，支持个性化配置和关闭相应的功能，详情搜索super_comment进行详细配置
+    - lua_filter@*text_formatting                   #给自定义用户词扩展一个换行:\n, 制表符：\t, 回车符：\r, 空格：\s
     - uniquifier                                    #去重
 
 predictor:
@@ -154,11 +152,19 @@ predictor:
 #大写N日期：N20250315
 #节日：ojr 或者 /jr
 #问候模板：/day 或者 oday
+#生日信息：/sr或者osr
+birthday_reminder:  #日期格式：必须是4位数字，格式为MMDD（月份和日期），例如：1月27日 → 0127 ，#备注格式：在日期后添加逗号，然后添加任意文本作为备注，例如："0501,我的好朋友"，也可以无备注
+  solar_birthdays:  # 公历生日, 姓名: "日期,备注" or 姓名: "日期"
+    小明: "0501,准备礼物"
+    大明: "0405"
+  lunar_birthdays:  # 农历生日, 姓名: "日期,备注" or 姓名: "日期"
+    小明: "0114"
+    小红: "0815,农历中秋"
 
 #快符lua，lua中有预设，26个字母、10个数字，你可以在这里配置替换默认的值，键可以是一个或多个，值可以是任意字符这里不齐全默认配置将生效
 quick_symbol_text:
-  q: "‰"
-  w: "？"
+  q: "欢迎使用万象拼音"
+  w: "噢我的天哪！"
   e: "（"
   r: "）"
   t: "~"
@@ -201,6 +207,7 @@ calculator:
 # 主翻译器，拼音
 translator:
   dictionary: wanxiang          # 挂载词库 wanxiang.dict.yaml
+#  packs: user                  #导入根目录下名称为user.dict.yaml的自定义固定词典
 #  prism: double_pinyin          # 多方案共用一个词库时，为避免冲突，需要用 prism 指定一个名字。
   enable_completion: true  # 启用候选词补全
 #  user_dict: zrm.userdb  # 用户词典的文件名称
@@ -322,7 +329,7 @@ recognizer:
   patterns:  # 再增加方案专有的：
     punct: "^/([0-9]|10|[A-Za-z]+)$"    # 响应 symbols.yaml 的 symbols
     radical_lookup: "^`[A-Za-z]*$"        # 响应部件拆字与笔画的反查，与 radical_lookup/prefix 匹配
-    add_user_dict: "^ac[A-Za-z/`']*$"      #自造词
+    add_user_dict: "^``[A-Za-z/`']*$"      #自造词
     unicode: "^U[a-f0-9]+"              # 脚本将自动获取第 2 个字符 U 作为触发前缀，响应 lua_translator@unicode，输出 Unicode 字符
     number: "^R[0-9]+[.]?[0-9]*"        # 脚本将自动获取第 2 个字符 R 作为触发前缀，响应 lua_translator@number_translator，数字金额大写
     gregorian_to_lunar: "^N[0-9]{1,8}"  # 脚本将自动获取第 2 个字符 N 作为触发前缀，响应 lua_translator@lunar，公历转农历，输入 N20240115 得到「二〇二三年腊月初五」
@@ -396,8 +403,8 @@ editor:
 # 拼写设定
 speller:
 # table_translator翻译器，支持自动上屏。例如 “zmhu”可以自动上屏“怎么回事”
-  auto_select: true
-  auto_select_pattern: ^[a-z]+/|^[a-df-zA-DF-Z]\w{3}|^e\w{4}
+#  auto_select: true
+#  auto_select_pattern: ^[a-z]+/|^[a-df-zA-DF-Z]\w{3}|^e\w{4}
   # 如果不想让什么标点直接上屏，可以加在 alphabet，或者编辑标点符号为两个及以上的映射
   alphabet: zyxwvutsrqponmlkjihgfedcbaZYXWVUTSRQPONMLKJIHGFEDCBA7890`;/
   # initials 定义仅作为始码的按键，排除 ` 让单个的 ` 可以直接上屏
@@ -1461,8 +1468,8 @@ add_user_dict:
   enable_user_dict: true
   encode_commit_history: false # 是否对已上屛词自动成词〔仅 table_translator 有效〕  
   comment_format:
-  prefix: "ac"
-  tips: "〔自造词〕"
+  prefix: "``"
+  tips: "〔开始造词〕"
 
 #语法模型
 octagram:
@@ -1474,7 +1481,7 @@ octagram:
       collocation_penalty: -10          #默认-12 对常见搭配词组施加的惩罚值。较高的负值会降低这些搭配被选中的概率，防止过于频繁地出现某些固定搭配。
       non_collocation_penalty: -12      #默认-12 对非搭配词组施加的惩罚值。较高的负值会降低非搭配词组被选中的概率，避免不合逻辑或不常见的词组组合。
       weak_collocation_penalty: -24     #默认-24 对弱搭配词组施加的惩罚值。保持默认值通常是为了有效过滤掉不太常见但仍然合理的词组组合。
-      rear_penalty: -30                 #默认-18 对词组中后续词语的位置施加的惩罚值。较高的负值会降低某些词语在句子后部出现的概率，防止句子结构不自然。
+      rear_penalty: -18                 #默认-18 对词组中后续词语的位置施加的惩罚值。较高的负值会降低某些词语在句子后部出现的概率，防止句子结构不自然。
     translator/contextual_suggestions: false
     translator/max_homophones: 5
     translator/max_homographs: 5

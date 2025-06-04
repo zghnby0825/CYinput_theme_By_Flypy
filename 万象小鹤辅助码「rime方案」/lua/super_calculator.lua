@@ -2,7 +2,7 @@
 -- 说明 https://github.com/gaboolic/rime-shuangpin-fuzhuma/pull/41
 
 -- 原有功能：
--- 随机数生成、三角函数、幂函数、指数函数、对数函数求值
+-- 单个随机数生成、三角函数、幂函数、指数函数、对数函数求值
 -- 计算n次方根、平均值、方差、阶乘、角度与弧度的相互转化
 
 -- 新增功能：
@@ -16,12 +16,14 @@
 -- 组合数、排列数、最大公因数、最小公倍数求解；
 -- 点关于直线的对称点坐标、直线关于直线(或点)的对称直线方程求解；
 -- 连续自然数的幂方求和，包括平方和、立方和、4次方之和；前n个奇数或偶数的平方和、立方和、4次方之和；
+-- 求解勾股数、批量随机数、质因数分解、找质数
+-- 24点计算器(姑且算一个小游戏,雾)
 
 -- 功能引导键一览：
 -- cb = "连续自然数立方和(从1开始)"
 -- fp = "连续自然数4次方之和(从1开始)"
 -- sq = "连续自然数平方和(从1开始)"
--- tx = "已知数列的任意两项aᵢ、aₖ，求其通项公式"
+-- tx = "已知数列的任意两项aᵢ、aₖ及对应的项数i、k，求其通项公式"
 -- avg = "平均值"
 -- cos = "余弦"
 -- deg = "弧度转换为角度"
@@ -32,6 +34,7 @@
 -- esq = "前n个偶数的平方和"
 -- exp = "返回 e^x"
 -- gbs = "计算多个数的最小公倍数"
+-- ggs = "求解勾股数"
 -- gys = "计算多个数的最大公因数"
 -- hls = "计算行列式"
 -- ldf = "两点法求解一次函数解析式"
@@ -48,9 +51,12 @@
 -- sin = "正弦"
 -- sjs = "随机数"
 -- tan = "正切"
+-- tfp = "24点计算器"
 -- var = "方差"
 -- ybs = "一般式求解二次函数解析式"
 -- zhs = "计算组合数"
+-- zys = "质因数分解"
+-- zzs = "找质数"
 -- acos = "反余弦"
 -- asin = "反正弦"
 -- atan = "反正切"
@@ -60,12 +66,13 @@
 -- cosh = "双曲余弦"
 -- dbsl = "已知等比数列的首项a₁，公比q，求指定的前n项和"
 -- dcsl = "已知等差数列的首项a₁，公差d，求指定的前n项和"
--- eyyc = "求解二元一次方程组"
+-- eyyc = "求解二元一次方程组ax+by=e，cx+dy=f"
 -- fact = "阶乘"
 -- lzx1 = "已知两直线方程A₁x+B₁y+C₁=0和A₂x+B₂y+C₂=0，判断它们的位置关系"
 -- lzx2 = "已知直线l₁:A₁x+B₁y+C₁=0和l₂:A₂x+B₂y+C₂=0，求两条直线以彼此为轴的对称直线方程"
 -- loge = "e作为底数的对数"
 -- logt = "10作为底数的对数"
+-- psjs = "批量随机数"
 -- sinh = "双曲正弦"
 -- sjxx = "已知三角形三个顶点坐标，求其“心”的坐标"
 -- sjx1 = "已知三角形的三边长a、b、c，求三角形面积"
@@ -80,7 +87,7 @@
 -- xxqz = "向下取整"
 -- zdbx = "已知边数n与边长a计算正多边形面积"
 -- atan2 = "返回以弧度为单位的点(x,y)相对于x轴的逆时针角度"
--- dyzx1 = "已知一点坐标和直线方程，求点到直线的距离及对称点坐标"
+-- dyzx1 = "已知一点坐标(x₁,y₁)和直线方程Ax+By+C=0，求点到直线的距离及对称点坐标"
 -- dyzx2 = "已知一点P(x₁,y₁)和直线l:Ax+By+C=0，求直线l关于点P的对称直线l'的方程"
 -- ldexp = "返回 x*2^y"
 -- nroot = "计算 x 开 N 次方"
@@ -226,7 +233,7 @@ end
 
 
 
--- random([m [,n ]]) 返回m-n之间的随机数，n为空则返回1-m之间，都为空则返回0-1之间的小数
+-- random(m ,n) 返回m-n之间的随机数，n为空则返回1-m之间，都为空则返回0-1之间的小数
 function random(...) return math.random(...) end
 -- 注册到函数表中
 calc_methods["sjs"] = random
@@ -1241,7 +1248,7 @@ function solveLinearSystem(a, b, c, d, e, f)
     return "x="..x.."\ny="..y
 end
 calc_methods["eyyc"] = solveLinearSystem
-methods_desc["eyyc"] = "求解二元一次方程组"
+methods_desc["eyyc"] = "求解二元一次方程组ax+by=e，cx+dy=f"
 
 
 
@@ -1911,7 +1918,7 @@ function dyzx1(x1, y1, A, B, C)
     return "点到直线距离为"..D.."\n点关于直线的对称点坐标为("..x..","..y..")"
 end
 calc_methods["dyzx1"] = dyzx1
-methods_desc["dyzx1"] = "已知一点坐标和直线方程，求点到直线的距离及对称点坐标"
+methods_desc["dyzx1"] = "已知一点坐标(x₁, y₁)和直线方程Ax+By+C=0，求点到直线的距离及对称点坐标"
 
 
 
@@ -2340,7 +2347,7 @@ function hls(...)
     args = {...}
     n1 = #args
     sqrt_n = math.sqrt(n1)
-    -- 判断n是否为完全平方数，如果是，则将输入的元素重新排列成一个方阵
+    -- 判断n1是否为完全平方数，如果是，则将输入的元素重新排列成一个方阵
     if sqrt_n == math.floor(sqrt_n) then
         matrix = {}
         index = 1
@@ -2386,6 +2393,670 @@ end
 calc_methods["hls"] = hls
 methods_desc["hls"] = "计算行列式"
 
+
+
+
+-- 求解勾股数
+function ggs(...)
+    local args = {...}
+    local n = #args
+    if n == 0 then
+        return "请输入至少一个数"
+    elseif n > 2 then
+        return "最多只能输入2个数"
+    end
+
+    local function generateTriplets(a_param)
+        local results = {}
+        -- 生成作为直角边的解
+        if a_param % 2 == 1 then
+            local c = (a_param^2 - 1) / 2
+            local d = (a_param^2 + 1) / 2
+            local triplet = {a_param, c, d}
+            table.sort(triplet)
+            table.insert(results, triplet)
+        else
+            local c = (a_param^2) / 4 - 1
+            local d = (a_param^2) / 4 + 1
+            local triplet = {a_param, c, d}
+            table.sort(triplet)
+            table.insert(results, triplet)
+        end
+        return results
+    end
+
+    local function findHypotenuseTriplets(m)
+        local results = {}
+        local m_squared = m * m
+        local max_a = math.floor(m / math.sqrt(2))
+        for a = 1, max_a do
+            local b_squared = m_squared - a * a
+            if b_squared < 0 then break end
+            local b = math.sqrt(b_squared)
+            if b == math.floor(b) and b > a then
+                local triplet = {a, b, m}
+                table.sort(triplet)
+                table.insert(results, triplet)
+            end
+        end
+        return results
+    end
+
+    local function ggs1(a)
+        if type(a) ~= "number" or a < 1 or a ~= math.floor(a) then
+            return "参数必须是正整数"
+        end
+        if a % 2 == 1 and a < 3 then
+            return "输入1个参数时,奇数须大于等于3"
+        elseif a % 2 == 0 and a < 4 then
+            return "输入1个参数时,偶数须大于等于4"
+        end
+
+        local results = {}
+        -- 生成直角边解
+        local legTriplets = generateTriplets(a)
+        for _, t in ipairs(legTriplets) do
+            table.insert(results, t)
+        end
+        -- 生成斜边解
+        local hypoTrplets = findHypotenuseTriplets(a)
+        for _, t in ipairs(hypoTrplets) do
+            table.insert(results, t)
+        end
+
+        -- 去重
+        local seen = {}
+        local unique = {}
+        for _, t in ipairs(results) do
+            local key = table.concat(t, ',')
+            if not seen[key] then
+                seen[key] = true
+                table.insert(unique, t)
+            end
+        end
+
+        if #unique == 0 then
+            return "无解"
+        else
+            local parts = {}
+            for _, t in ipairs(unique) do
+                table.insert(parts, string.format("(%d,%d,%d)", t[1], t[2], t[3]))
+            end
+            return "勾股数为: " .. table.concat(parts, " 和 ")
+        end
+    end
+
+    local function ggs2(a, b)
+        if type(a) ~= "number" or a < 1 or a ~= math.floor(a) or
+           type(b) ~= "number" or b < 1 or b ~= math.floor(b) then
+            return "参数必须是正整数"
+        end
+        if a == b then
+            return "两个参数不能相等"
+        end
+
+        local results = {}
+
+        -- 两数作为直角边求斜边
+        local sum_sq = a^2 + b^2
+        local c = math.sqrt(sum_sq)
+        if c == math.floor(c) then
+            local triplet = {a, b, c}
+            table.sort(triplet)
+            table.insert(results, triplet)
+        end
+
+        -- 小数作为直角边,大数作为斜边求另一直角边
+        local sq = math.abs(a^2 - b^2)
+        local d = math.sqrt(sq)
+        if d == math.floor(d) then
+            local triplet = {a, b, d}
+            table.sort(triplet)
+            table.insert(results, triplet)
+        end
+
+        -- 作为生成元求三元组
+        local part1 = math.abs(a^2 - b^2)
+        local part2 = 2*a*b
+        local hypo = a^2 + b^2
+        local triplet = {part1, part2, hypo}
+        table.sort(triplet)
+        table.insert(results, triplet)
+
+        -- 去重逻辑
+        local seen = {}
+        local unique = {}
+        for _, t in ipairs(results) do
+            local key = table.concat(t, ",")
+            if not seen[key] then
+                seen[key] = true
+                table.insert(unique, t)
+            end
+        end
+
+        if #unique == 0 then
+            return "无解"
+        else
+            local parts = {}
+            for _, t in ipairs(unique) do
+                table.insert(parts, string.format("(%d,%d,%d)", t[1], t[2], t[3]))
+            end
+            return "勾股数为: " .. table.concat(parts, " 和 ")
+        end
+    end
+
+    return (n == 1) and ggs1(args[1]) or ggs2(args[1], args[2])
+end
+calc_methods["ggs"] = ggs
+methods_desc["ggs"] = "求解勾股数"
+
+
+
+
+-- 批量随机数生成器
+-- 参数模式1（3个参数）：digits（位数）、count（数量）、unique（是否唯一，0为true/1为false）
+-- 参数模式2（4个参数）：min（最小值）、max（最大值）、count（数量）、unique（是否唯一）
+function generateRandomNumbers(...)
+    local args = {...}
+    local min, max, count, unique
+    -- 验证参数数量
+    if #args ~= 3 and #args ~= 4 then
+        return "参数数量必须为3或4"
+    end
+    -- 解析参数模式
+    if #args == 3 then
+        local digits, count_arg, unique_arg = args[1], args[2], args[3]
+        -- 验证参数类型和范围
+        if type(digits) ~= "number" or type(count_arg) ~= "number" or type(unique_arg) ~= "number" then
+            return "位数、数量和唯一性参数必须为数字"
+        elseif digits < 1 or digits ~= math.floor(digits) then
+            return "位数必须为正整数"
+        elseif digits > 18 then
+            return "位数不能超过18位"
+        end
+        min = 10^(digits-1)
+        max = 10^digits - 1
+        if digits == 1 then min = 1 end  -- 一位数的特殊情况
+        count = count_arg
+        unique = unique_arg
+    else
+        min, max, count, unique = args[1], args[2], args[3], args[4]
+        -- 验证参数合法性
+        if type(min) ~= "number" or type(max) ~= "number" or type(count) ~= "number" then
+            return "最小值、最大值和数量必须为数字"
+        elseif min ~= math.floor(min) or max ~= math.floor(max) then
+            return "最小值、最大值必须为整数"
+        end
+    end
+    -- 通用参数验证
+    if min > max then
+        min, max = max, min  -- 自动交换顺序
+    end
+    if count < 1 or count ~= math.floor(count) then
+        return "数量必须为正整数"
+    elseif unique ~= 0 and unique ~= 1 then
+        return "控制唯一性的参数必须为0或1"
+    elseif unique == 0 and count > (max - min + 1) then
+        return "唯一性要求下，数量不能超过范围大小"
+    end
+    -- 存储随机数的表
+    local result = {}
+    -- 生成随机数
+    if unique == 0 then
+        local used = {}  -- 记录已生成的随机数
+        for i = 1, count do
+            local num
+            repeat
+                num = math.random(min, max)
+            until not used[num]
+            used[num] = true
+            result[i] = num
+        end
+    else
+        -- 非唯一情况，直接填充结果表
+        for i = 1, count do
+            result[i] = math.random(min, max)
+        end
+    end
+    -- 格式化输出
+    local formatted = {}
+    for i = 1, #result do
+        if i > 1 and (i-1) % 10 == 0 then
+            table.insert(formatted, "\n")
+        end
+        table.insert(formatted, tostring(result[i]))
+        if i < #result and i % 10 ~= 0 then
+            table.insert(formatted, ",")
+        end
+    end
+    return table.concat(formatted)
+end
+calc_methods["psjs"] = generateRandomNumbers
+methods_desc["psjs"] = "批量随机数"
+
+
+
+
+-- 质因数分解（带优化输出格式）
+function prime_factorization(n)
+    -- 参数检查与位数限制
+    if type(n) ~= "number" or n <= 0 or math.floor(n) ~= n then
+        return "参数必须是正整数"
+    end
+    local digits = #tostring(n)
+    if digits > 18 then
+        return "数字超限! 最大支持18位数字的质因数分解。"
+    end
+    -- 处理特殊情况
+    if n == 1 then return "1" end
+    local factors = {}
+    -- 处理2的因子
+    while n % 2 == 0 do
+        factors[2] = (factors[2] or 0) + 1
+        n = n // 2
+    end
+    -- 处理奇数因子
+    local divisor = 3
+    local max_divisor = math.floor(math.sqrt(n))
+    while divisor <= max_divisor and n > 1 do
+        while n % divisor == 0 do
+            factors[divisor] = (factors[divisor] or 0) + 1
+            n = n // divisor
+            max_divisor = math.floor(math.sqrt(n))
+        end
+        divisor = divisor + 2
+    end
+    -- 如果n仍然大于1，则n本身是一个质数
+    if n > 1 then
+        factors[n] = (factors[n] or 0) + 1
+    end
+    -- 优化的指数符号表（仅包含0-9）
+    local superscript_digits = {
+        ["0"] = "⁰", ["1"] = "¹", ["2"] = "²", ["3"] = "³", 
+        ["4"] = "⁴", ["5"] = "⁵", ["6"] = "⁶", ["7"] = "⁷", 
+        ["8"] = "⁸", ["9"] = "⁹"
+    }
+    -- 转换数字为上标形式（支持任意位数）
+    local function to_superscript(num)
+        local s = tostring(num)
+        local result = ""
+        for i = 1, #s do
+            local c = s:sub(i, i)
+            result = result .. (superscript_digits[c] or c)
+        end
+        return result
+    end
+    -- 生成输出字符串
+    local output = {}
+    for factor, count in pairs(factors) do
+        local str = tostring(factor)
+        if count > 1 then
+            str = str .. to_superscript(count)
+        end
+        table.insert(output, str)
+    end
+    -- 按质因数从小到大排序
+    table.sort(output, function(a, b)
+        local fa = tonumber(a:match("^%d+"))
+        local fb = tonumber(b:match("^%d+"))
+        return fa < fb
+    end)
+    return table.concat(output, "×")
+end
+calc_methods["zys"] = prime_factorization
+methods_desc["zys"] = "质因数分解"
+
+
+
+-- 找质数（欧拉筛法）
+function sieve_of_eratosthenes(n)
+    if type(n) ~= "number" or n <= 1 or math.floor(n) ~= n then
+        return "参数必须是大于1的正整数"
+    end
+    if n > 26338 then
+        return "数字超限!"
+    end
+    local is_prime = {}
+    local primes = {}
+    -- 初始化数组，默认所有数都是质数
+    for i = 2, n do
+        is_prime[i] = true
+    end
+    -- 欧拉筛法核心逻辑
+    for i = 2, n do
+        if is_prime[i] then
+            table.insert(primes, i)
+        end   
+        -- 遍历已找到的质数，标记合数
+        for j = 1, #primes do
+            local p = primes[j]
+            local composite = i * p
+            if composite > n then break end
+            is_prime[composite] = false
+            -- 关键优化：确保每个合数只被其最小质因数标记一次
+            if i % p == 0 then break end
+        end
+    end
+    -- 格式化输出
+    local output = {}
+    for i = 1, #primes do
+        table.insert(output, tostring(primes[i]))
+        if (i % 10 == 0) or (i == #primes) then
+            table.insert(output, "\n")
+        else
+            table.insert(output, ",")
+        end
+    end
+    -- 如果最后一个元素是换行符，则移除它
+    if #output > 0 and output[#output] == "\n" then
+        output[#output] = nil
+    end
+    return table.concat(output)
+end
+calc_methods["zzs"] = sieve_of_eratosthenes
+methods_desc["zzs"] = "找质数"
+
+
+
+-- 24点计算器（含去重逻辑）
+function solve24(...)
+    -- 检查表中是否包含某个值
+    local function table_contains(tab, val)
+        for _, value in ipairs(tab) do
+            if value == val then
+                return true
+            end
+        end
+        return false
+    end
+
+    -- 生成随机数的函数
+    local function generate_numbers()
+        math.randomseed(os.time())
+        local numbers = {}
+        local magic_numbers = {} -- 新增：魔术字数组
+        for i = 1, 4 do
+            numbers[i] = math.random(1, 13)
+            -- 生成魔术字，1的魔术字固定为1
+            if numbers[i] == 1 then
+                magic_numbers[i] = 1
+            else
+                local newrd = math.random(1, 40)
+                -- 确保魔术字不重复
+                while table_contains(magic_numbers, newrd) do
+                    newrd = math.random(1, 40)
+                end
+                magic_numbers[i] = newrd
+            end
+        end
+        -- 如果数字有重复，魔术字也做同样的重复
+        for i = 1, 4 do
+            for j = i + 1, 4 do
+                if numbers[i] == numbers[j] then
+                    magic_numbers[j] = magic_numbers[i]
+                end
+            end
+        end
+        return numbers, magic_numbers
+    end
+    
+    -- 去重用的魔术字解决方案记录
+    local hash_solutions = {}
+    local solutions = {}
+    
+    -- 判断两个数是否接近（处理浮点数精度问题）
+    local function is_close(a, b)
+        return math.abs(a - b) < 1e-9
+    end
+    
+    -- 基本计算函数
+    local function compute(a, b, op)
+        if op == '+' then return a + b
+        elseif op == '-' then return a - b
+        elseif op == '*' then return a * b
+        elseif op == '/' then
+            if b == 0 then return nil end
+            return a / b
+        end
+    end
+    
+    -- 计算魔术字
+    local function compute_magic(a, b, op, magic_a, magic_b)
+        if op == '+' then return magic_a + magic_b
+        elseif op == '-' then return magic_a - magic_b
+        elseif op == '*' then return magic_a * magic_b
+        elseif op == '/' then
+            if magic_b == 0 then return 999999999 end -- 避免除以0
+            return magic_a / magic_b
+        end
+    end
+    
+    -- 排列组合函数
+    local function permute(t)
+        local result = {}
+        local function permute_helper(current, remaining)
+            if #remaining == 0 then
+                table.insert(result, {table.unpack(current)})
+            else
+                for i = 1, #remaining do
+                    local new_current = {table.unpack(current)}
+                    table.insert(new_current, remaining[i])
+                    local new_remaining = {}
+                    for j = 1, #remaining do
+                        if j ~= i then
+                            table.insert(new_remaining, remaining[j])
+                        end
+                    end
+                    permute_helper(new_current, new_remaining)
+                end
+            end
+        end
+        permute_helper({}, t)
+        return result
+    end
+    
+    -- 用于添加解决方案并去重
+    local function add_solution(expr, value, magic_value)
+        if is_close(value, 24) then
+            -- 检查魔术字是否已存在
+            local is_duplicate = false
+            local replace_index = -1
+            
+            for i, hash in ipairs(hash_solutions) do
+                if math.abs(magic_value - hash) / (math.abs(magic_value) + 1e-9) < 1e-3 then
+                    is_duplicate = true
+                    replace_index = i
+                    break
+                end
+            end
+            
+            if not is_duplicate then
+                -- 新解决方案，添加到列表
+                table.insert(solutions, expr)
+                table.insert(hash_solutions, magic_value)
+            else
+                -- 检查是否需要替换为更优的解决方案
+                local need_replace = false
+                local existing_expr = solutions[replace_index]
+                
+                -- 比较括号数量
+                local current_brackets = expr:gsub("[^%(%)]", ""):len()
+                local existing_brackets = existing_expr:gsub("[^%(%)]", ""):len()
+                if current_brackets < existing_brackets then
+                    need_replace = true
+                -- 括号数量相同，比较减号数量
+                elseif current_brackets == existing_brackets then
+                    local current_minus = expr:gsub("[^-]", ""):len()
+                    local existing_minus = existing_expr:gsub("[^-]", ""):len()
+                    if current_minus < existing_minus then
+                        need_replace = true
+                    -- 减号数量相同，比较除号数量
+                    elseif current_minus == existing_minus then
+                        local current_div = expr:gsub("[^/÷]", ""):len()
+                        local existing_div = existing_expr:gsub("[^/÷]", ""):len()
+                        if current_div < existing_div then
+                            need_replace = true
+                        -- 除号数量相同，比较表达式字典序
+                        elseif current_div == existing_div and expr < existing_expr then
+                            need_replace = true
+                        end
+                    end
+                end
+                
+                if need_replace then
+                    solutions[replace_index] = expr
+                    hash_solutions[replace_index] = magic_value
+                end
+            end
+        end
+    end
+    
+    -- 核心解决24点问题的函数
+    local function solve_24_with_magic(numbers, magic_numbers)
+        local operators = {'+', '-', '*', '/'}
+        local perms = permute(numbers)
+        local magic_perms = permute(magic_numbers) -- 魔术字的排列组合
+        
+        -- 遍历所有数字和魔术字的排列组合
+        for i, nums in ipairs(perms) do
+            local magics = magic_perms[i]
+            if magics then
+                for _, op1 in ipairs(operators) do
+                    for _, op2 in ipairs(operators) do
+                        for _, op3 in ipairs(operators) do
+                            -- 情况1: ((a op1 b) op2 c) op3 d
+                            local v1 = compute(nums[1], nums[2], op1)
+                            local m1 = compute_magic(nums[1], nums[2], op1, magics[1], magics[2])
+                            if v1 and m1 then
+                                local v2 = compute(v1, nums[3], op2)
+                                local m2 = compute_magic(v1, nums[3], op2, m1, magics[3])
+                                if v2 and m2 then
+                                    local v3 = compute(v2, nums[4], op3)
+                                    local m3 = compute_magic(v2, nums[4], op3, m2, magics[4])
+                                    if v3 and m3 then
+                                        local expr = string.format("((%d%s%d)%s%d)%s%d", nums[1], op1, nums[2], op2, nums[3], op3, nums[4])
+                                        add_solution(expr, v3, m3)
+                                    end
+                                end
+                            end
+                            
+                            -- 情况2: (a op1 (b op2 c)) op3 d
+                            local v1 = compute(nums[2], nums[3], op2)
+                            local m1 = compute_magic(nums[2], nums[3], op2, magics[2], magics[3])
+                            if v1 and m1 then
+                                local v2 = compute(nums[1], v1, op1)
+                                local m2 = compute_magic(nums[1], v1, op1, magics[1], m1)
+                                if v2 and m2 then
+                                    local v3 = compute(v2, nums[4], op3)
+                                    local m3 = compute_magic(v2, nums[4], op3, m2, magics[4])
+                                    if v3 and m3 then
+                                        local expr = string.format("(%d%s(%d%s%d))%s%d", nums[1], op1, nums[2], op2, nums[3], op3, nums[4])
+                                        add_solution(expr, v3, m3)
+                                    end
+                                end
+                            end
+                            
+                            -- 情况3: a op1 ((b op2 c) op3 d)
+                            local v1 = compute(nums[2], nums[3], op2)
+                            local m1 = compute_magic(nums[2], nums[3], op2, magics[2], magics[3])
+                            if v1 and m1 then
+                                local v2 = compute(v1, nums[4], op3)
+                                local m2 = compute_magic(v1, nums[4], op3, m1, magics[4])
+                                if v2 and m2 then
+                                    local v3 = compute(nums[1], v2, op1)
+                                    local m3 = compute_magic(nums[1], v2, op1, magics[1], m2)
+                                    if v3 and m3 then
+                                        local expr = string.format("%d%s((%d%s%d)%s%d)", nums[1], op1, nums[2], op2, nums[3], op3, nums[4])
+                                        add_solution(expr, v3, m3)
+                                    end
+                                end
+                            end
+                            
+                            -- 情况4: a op1 (b op2 (c op3 d))
+                            local v1 = compute(nums[3], nums[4], op3)
+                            local m1 = compute_magic(nums[3], nums[4], op3, magics[3], magics[4])
+                            if v1 and m1 then
+                                local v2 = compute(nums[2], v1, op2)
+                                local m2 = compute_magic(nums[2], v1, op2, magics[2], m1)
+                                if v2 and m2 then
+                                    local v3 = compute(nums[1], v2, op1)
+                                    local m3 = compute_magic(nums[1], v2, op1, magics[1], m2)
+                                    if v3 and m3 then
+                                        local expr = string.format("%d%s(%d%s(%d%s%d))", nums[1], op1, nums[2], op2, nums[3], op3, nums[4])
+                                        add_solution(expr, v3, m3)
+                                    end
+                                end
+                            end
+                            
+                            -- 情况5: (a op1 b) op2 (c op3 d)
+                            local v1 = compute(nums[1], nums[2], op1)
+                            local m1 = compute_magic(nums[1], nums[2], op1, magics[1], magics[2])
+                            local v2 = compute(nums[3], nums[4], op3)
+                            local m2 = compute_magic(nums[3], nums[4], op3, magics[3], magics[4])
+                            if v1 and m1 and v2 and m2 then
+                                local v3 = compute(v1, v2, op2)
+                                local m3 = compute_magic(v1, v2, op2, m1, m2)
+                                if v3 and m3 then
+                                    local expr = string.format("(%d%s%d)%s(%d%s%d)", nums[1], op1, nums[2], op2, nums[3], op3, nums[4])
+                                    add_solution(expr, v3, m3)
+                                end
+                            end
+                        end
+                    end
+                end
+            end
+        end
+        return solutions
+    end
+    
+    -- 处理函数参数
+    local arg = {...}
+    if #arg == 0 then
+        -- 无参数，生成随机数
+        local numbers, magic_numbers = generate_numbers()
+        return "生成的随机数: " .. table.concat(numbers, ", ")
+    elseif #arg == 4 then
+        -- 检查输入的四个参数是否都在1到13之间
+        for i, num in ipairs(arg) do
+            if type(num) ~= "number" or num < 1 or num > 13 then
+                return "错误：请输入4个1到13之间的数字。"
+            end
+        end
+        -- 为输入的数字生成魔术字
+        local magic_numbers = {}
+        for i, num in ipairs(arg) do
+            if num == 1 then
+                magic_numbers[i] = 1
+            else
+                local newrd = math.random(1, 40)
+                while table_contains(magic_numbers, newrd) do
+                    newrd = math.random(1, 40)
+                end
+                magic_numbers[i] = newrd
+            end
+        end
+        -- 处理数字重复的情况
+        for i = 1, 4 do
+            for j = i + 1, 4 do
+                if arg[i] == arg[j] then
+                    magic_numbers[j] = magic_numbers[i]
+                end
+            end
+        end
+        -- 求解24点
+        local solutions = solve_24_with_magic(arg, magic_numbers)
+        if #solutions == 0 then
+            return "没有找到解决方案。"
+        else
+            return "共找到" .. #solutions .. "种解决方案:\n" .. table.concat(solutions, "\n")
+        end
+    else
+        return "错误：请输入4个数字或者不输入参数以生成随机数。"
+    end
+end
+calc_methods["tfp"] = solve24
+methods_desc["tfp"] = "24点计算器"
+ 
 
 
 
