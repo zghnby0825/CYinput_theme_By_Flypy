@@ -17,8 +17,8 @@ patch:
       国煌: "0825,准备礼物"
       爱莉: "0413"
     lunar_birthdays:  # 农历生日, 姓名: "日期,备注" or 姓名: "日期"
-      小明: "0707"
-      小红: "0413,农历中秋"
+      国煌: "0707"
+      爱莉: "0413,农历中秋"
   #下面用来改变你的windows小狼毫右下角软件图标
   #schema/+:
   #  icon: "icons/zhong.ico"
@@ -66,8 +66,10 @@ patch:
   #下面这两个是快符的引导符号，前者用来引导符号、双击重复上屏符号，后者双击重复上屏汉字
   recognizer/patterns/quick_symbol: "^;.*$"
   #下面这个用来设置开启调频的时候哪些内容不调频
-  translator/disable_user_dict_for_patterns: "^[a-z]{1,6}"
+  translator/disable_user_dict_for_patterns: "^[a-z]{1,6}" #基本的6码3字不调频
   
   speller/+:
     auto_select: true
     auto_select_pattern: ^[a-z]+/|^[a-df-zA-DF-Z]\w{3}|^e\w{4}
+
+  translator/enable_user_dict: true   # 是否开启自动调频
