@@ -543,9 +543,10 @@ preset_keyboards:
       - {width: 2}
       - {click: backspace, width: 13, name: backspace, preview: false}
       #4
-      - {click: eisu_toggle_123_number, width: 15, has_menu: text_halfperiod, long_click: eisu_toggle_ABC_english, name: number, preview: false}
+      - {click: eisu_toggle_123_number, width: 15, has_menu: text_halfperiod, name: number, preview: false}
+      - {click: eisu_toggle_ABC_english, width: 10, name: en, preview: false}
       - {click: commit_fullcomma,  swipe_up: "?", name: commit_fullcomma, width: 10, preview: false} #逗号+问号
-      - {click: space, width: 40, name: space, swipe_up: select_scecond, preview: false}
+      - {click: space, width: 30, name: space, swipe_up: select_scecond, preview: false}
       - {click: send_ffhc,  swipe_up: "。", name: send_ffhc, width: 10, preview: false} #次选+句号
       - {click: return, width: 25, name: return, swipe_up: select_third, composing: confirm, long_click: next, rect_preview: true, preview: false}
     width: 10
@@ -591,9 +592,10 @@ preset_keyboards:
       - {width: 2}
       - {click: backspace, width: 13, name: backspace}
       #4
-      - {click: eisu_toggle_符_symbols, long_click: eisu_toggle_返回_default_schema_default, width: 15, name: symbol}
+      - {click: eisu_toggle_123_number, width: 15, name: number}
+      - {click: eisu_toggle_返回_default_schema_default, width: 10, name: default}
       - {click: commit_halfat, width: 10 }
-      - {click: space, width: 40, name: space}
+      - {click: space, width: 30, name: space}
       - {click: send_dot, width: 10 }
       - {click: return, width: 25, name: return, composing: confirm}
   
