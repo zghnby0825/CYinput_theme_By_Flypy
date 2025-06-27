@@ -2,7 +2,7 @@
 
 〉https://appgallery.huawei.com/app/detail?id=app.flytype.hmos.bim&channelId=SHARE
 
-# VGHFly「纯小鹤音形」：
+# VGHFly：
 
 基于原主题修改内容：
 
@@ -11,7 +11,7 @@
 
 2、英文键盘做了习惯性的处理，空格左边加了“ @ ”按键，右边为“ . ”
 
-## VGHFly「纯小鹤音形」主题样式：
+## VGHFly主题样式：
 
  ![主题样式](纯音形样式.jpg)
  
